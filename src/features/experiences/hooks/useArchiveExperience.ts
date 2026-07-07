@@ -1,0 +1,18 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'sonner'
+import { experienceManagementApi } from '../api/experienceManagementApi'
+
+export function useArchiveExperience() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (id: string) => experienceManagementApi.archive(id),
+    onSuccess: () => {
+      toast.success('Experiência arquivada com sucesso!')
+      queryClient.invalidateQueries({ queryKey: ['management-experiences'] })
+    },
+    onError: () => {
+      toast.error('Erro ao arquivar experiência.')
+    },
+  })
+}

@@ -1,0 +1,28 @@
+node_modules
+dist
+src/routeTree.gen.ts
+
+#tanstack
+.tanstack/
+
+# env
+# .env
+.env.base
+# .env.local
+# .env.development.local
+# .env.test.local
+# .env.production.local
+
+# logs
+*.log
+npm-debug.log*
+
+# editor
+.vscode/settings.json
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+reasonix.toml

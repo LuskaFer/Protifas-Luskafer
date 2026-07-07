@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" fill="none">
+  <rect width="640" height="360" fill="#0f172a"/>
+  <rect x="0" y="0" width="640" height="28" fill="#1e293b"/>
+  <circle cx="16" cy="14" r="5" fill="#ef4444"/>
+  <circle cx="32" cy="14" r="5" fill="#f59e0b"/>
+  <circle cx="48" cy="14" r="5" fill="#22c55e"/>
+  <rect x="260" y="8" width="120" height="12" rx="6" fill="#334155"/>
+  <line x1="0" y1="50" x2="640" y2="50" stroke="#1e293b" stroke-width="1"/>
+  <rect x="18" y="64" width="120" height="24" rx="6" fill="#1e293b"/>
+  <text x="30" y="80" font-family="monospace" font-size="11" fill="#64748b">POST /api/clients</text>
+  <rect x="18" y="100" width="604" height="200" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="30" y="125" font-family="monospace" font-size="11" fill="#e2e8f0">{</text>
+  <text x="30" y="145" font-family="monospace" font-size="11" fill="#e2e8f0">  <tspan fill="#22d3ee">"name"</tspan>: <tspan fill="#a0aec0">"Lucas"</tspan>,</text>
+  <text x="30" y="165" font-family="monospace" font-size="11" fill="#e2e8f0">  <tspan fill="#22d3ee">"email"</tspan>: <tspan fill="#a0aec0">"lucas@email.com"</tspan>,</text>
+  <text x="30" y="185" font-family="monospace" font-size="11" fill="#e2e8f0">  <tspan fill="#22d3ee">"type"</tspan>: <tspan fill="#a0aec0">"PF"</tspan>,</text>
+  <text x="30" y="205" font-family="monospace" font-size="11" fill="#e2e8f0">  <tspan fill="#22d3ee">"documents"</tspan>: [</text>
+  <text x="30" y="225" font-family="monospace" font-size="11" fill="#e2e8f0">    { <tspan fill="#22d3ee">"type"</tspan>: <tspan fill="#a0aec0">"CPF"</tspan>, <tspan fill="#22d3ee">"value"</tspan>: <tspan fill="#a0aec0">"***"</tspan> },</text>
+  <text x="30" y="245" font-family="monospace" font-size="11" fill="#e2e8f0">    { <tspan fill="#22d3ee">"type"</tspan>: <tspan fill="#a0aec0">"RG"</tspan>, <tspan fill="#22d3ee">"value"</tspan>: <tspan fill="#a0aec0">"***"</tspan> }</text>
+  <text x="30" y="265" font-family="monospace" font-size="11" fill="#e2e8f0">  ]</text>
+  <text x="30" y="285" font-family="monospace" font-size="11" fill="#e2e8f0">}</text>
+  <rect x="0" y="332" width="640" height="28" fill="#1e293b"/>
+  <circle cx="580" cy="346" r="4" fill="#22c55e"/>
+  <text x="592" y="350" font-family="monospace" font-size="9" fill="#22c55e">200 OK</text>
+</svg>
