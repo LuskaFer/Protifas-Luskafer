@@ -8,6 +8,7 @@ import {
   Code2,
   ExternalLink,
   Globe,
+  GraduationCap,
   Loader2,
   Mail,
   Send,
@@ -188,6 +189,69 @@ const MOCK_EXPERIENCES: ExperienceCardData[] = [
   },
 ]
 
+const MOCK_EDUCATION: EducationCardData[] = [
+  {
+    id: 'edu-1',
+    course: {
+      pt: 'Pós-graduação em Arquitetura em Java',
+      en: 'Postgraduate in Java Architecture',
+    },
+    institution: 'FIAP',
+    period: { pt: '', en: '' },
+    description: { pt: '', en: '' },
+  },
+  {
+    id: 'edu-2',
+    course: {
+      pt: 'Graduação em Inteligência Artificial',
+      en: 'Bachelor\u2019s in Artificial Intelligence',
+    },
+    institution: 'Anhembi Morumbi',
+    period: { pt: '', en: '' },
+    description: { pt: '', en: '' },
+  },
+  {
+    id: 'edu-3',
+    course: {
+      pt: 'Análise e Desenvolvimento de Sistemas',
+      en: 'Systems Analysis and Development',
+    },
+    institution: 'FIAP',
+    period: { pt: '', en: '' },
+    description: { pt: '', en: '' },
+  },
+  {
+    id: 'edu-4',
+    course: {
+      pt: 'Design Gráfico',
+      en: 'Graphic Design',
+    },
+    institution: 'UNIP',
+    period: { pt: '', en: '' },
+    description: { pt: '', en: '' },
+  },
+  {
+    id: 'edu-5',
+    course: {
+      pt: 'Técnico em Administração',
+      en: 'Technical in Administration',
+    },
+    institution: 'ETEC',
+    period: { pt: '', en: '' },
+    description: { pt: '', en: '' },
+  },
+  {
+    id: 'edu-6',
+    course: {
+      pt: 'Técnico em T.I.',
+      en: 'IT Technician',
+    },
+    institution: 'Senac',
+    period: { pt: '', en: '' },
+    description: { pt: '', en: '' },
+  },
+]
+
 interface ProjectCardData {
   id: string
   type: 'DEV' | 'GENERAL'
@@ -208,6 +272,14 @@ interface ExperienceCardData {
   link: string
   thumbnail: string | null
   gallery: string[]
+}
+
+interface EducationCardData {
+  id: string
+  course: { pt: string; en: string }
+  institution: string
+  period: { pt: string; en: string }
+  description: { pt: string; en: string }
 }
 
 function ContactForm() {
@@ -552,6 +624,56 @@ function LandingPage() {
         </div>
       </section>
 
+      {/* Academic Formation */}
+      <section id="education" className="border-t border-border/50 px-4 py-24">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-16 text-center">
+            <div className="mb-4 inline-flex size-12 items-center justify-center rounded-2xl bg-primary/10">
+              <GraduationCap className="size-6 text-primary" />
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              {t('education.title')}
+            </h2>
+            <p className="mt-3 text-muted-foreground">{t('education.subtitle')}</p>
+          </div>
+
+          <div className="relative">
+            <div className="absolute left-4 top-0 h-full w-px bg-border md:left-1/2 md:-translate-x-px" />
+
+            <div className="space-y-12">
+              {MOCK_EDUCATION.map((edu, index) => (
+                <div
+                  key={edu.id}
+                  className={`relative flex flex-col gap-6 md:flex-row ${
+                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  }`}
+                >
+                  <div className="absolute left-4 top-1 z-10 flex size-3 -translate-x-1/2 items-center justify-center rounded-full border-2 border-primary bg-background md:left-1/2" />
+
+                  <div className="hidden md:block md:w-1/2" />
+
+                  <div className="ml-10 md:ml-0 md:w-1/2">
+                    <div className="rounded-xl border border-border/50 bg-card p-6 shadow-xs transition-all duration-300 hover:border-primary/30 hover:shadow-md">
+                      <div className="mb-1 flex items-center gap-2 text-xs text-muted-foreground">
+                        <GraduationCap className="size-3.5" />
+                        {edu.period[lang] || <span className="italic">{t('education.noDate')}</span>}
+                      </div>
+                      <h3 className="text-lg font-bold text-foreground">{edu.course[lang]}</h3>
+                      <p className="mb-3 text-sm font-medium text-primary">{edu.institution}</p>
+                      {edu.description[lang] && (
+                        <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                          {edu.description[lang]}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Work Experience */}
       <section id="experience" className="border-t border-border/50 px-4 py-24">
         <div className="mx-auto max-w-4xl">
@@ -562,50 +684,40 @@ function LandingPage() {
             <p className="mt-3 text-muted-foreground">{t('experience.subtitle')}</p>
           </div>
 
-          <div className="relative">
-            <div className="absolute left-4 top-0 h-full w-px bg-border md:left-1/2 md:-translate-x-px" />
-
-            <div className="space-y-12">
-              {allExperiences.map((exp, index) => (
-                <div
-                  key={exp.id}
-                  className={`relative flex flex-col gap-6 md:flex-row ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}
-                >
-                  <div className="absolute left-4 top-1 z-10 flex size-3 -translate-x-1/2 items-center justify-center rounded-full border-2 border-primary bg-background md:left-1/2" />
-
-                  <div className="hidden md:block md:w-1/2" />
-
-                  <div className="ml-10 md:ml-0 md:w-1/2">
-                    <div
-                      onClick={() =>
-                        setModalContent({
-                          type: 'experience',
-                          title: exp.role[lang],
-                          description: exp.description[lang],
-                          subtitle: exp.company,
-                          period: exp.period[lang],
-                          gallery: exp.gallery?.length ? exp.gallery : undefined,
-                          link: exp.link || undefined,
-                        })
-                      }
-                      className="cursor-pointer rounded-xl border border-border/50 bg-card p-6 shadow-xs transition-all duration-300 hover:border-primary/30 hover:shadow-md"
-                    >
-                      <div className="mb-1 flex items-center gap-2 text-xs text-muted-foreground">
-                        <Calendar className="size-3.5" />
-                        {exp.period[lang]}
-                      </div>
+          <div className="space-y-6">
+            {allExperiences.map(exp => (
+              <div
+                key={exp.id}
+                onClick={() =>
+                  setModalContent({
+                    type: 'experience',
+                    title: exp.role[lang],
+                    description: exp.description[lang],
+                    subtitle: exp.company,
+                    period: exp.period[lang],
+                    gallery: exp.gallery?.length ? exp.gallery : undefined,
+                    link: exp.link || undefined,
+                  })
+                }
+                className="group cursor-pointer rounded-xl border border-border/50 bg-card p-6 shadow-xs transition-all duration-300 hover:border-primary/30 hover:shadow-md"
+              >
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
                       <h3 className="text-lg font-bold text-foreground">{exp.role[lang]}</h3>
-                      <p className="mb-3 text-sm font-medium text-primary">{exp.company}</p>
-                      <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
-                        {exp.description[lang]}
-                      </p>
+                      <p className="text-sm font-medium text-primary">{exp.company}</p>
                     </div>
+                    <span className="shrink-0 flex items-center gap-1.5 whitespace-nowrap rounded-full border border-border/50 bg-muted/50 px-3 py-1 text-xs text-muted-foreground">
+                      <Calendar className="size-3" />
+                      {exp.period[lang]}
+                    </span>
                   </div>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {exp.description[lang]}
+                  </p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
