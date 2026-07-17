@@ -110,10 +110,10 @@ body {
 
 :root,
 .light {
-  --primary: #0064d6;
+  --primary: #334155;
   --primary-foreground: #ffffff;
-  --primary-dark: #0058bd;
-  --primary-light: #0a7cff;
+  --primary-dark: #1e293b;
+  --primary-light: #475569;
   --secondary: #475569;
   --secondary-foreground: #ffffff;
   --secondary-dark: #364153;
@@ -133,7 +133,7 @@ body {
   --accent-foreground: oklch(0.205 0 0);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: #0064d6;
+  --ring: #334155;
 
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -152,10 +152,10 @@ body {
 }
 
 .dark {
-  --primary: #2563eb;
-  --primary-foreground: #ffffff;
-  --primary-dark: #1d4ed8;
-  --primary-light: #3b82f6;
+  --primary: #cbd5e1;
+  --primary-foreground: #0f172a;
+  --primary-dark: #94a3b8;
+  --primary-light: #e2e8f0;
   --secondary: #475569;
   --secondary-foreground: #ffffff;
   --secondary-dark: #364153;
@@ -174,7 +174,7 @@ body {
   --accent-foreground: oklch(0.985 0 0);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: #2563eb;
+  --ring: #cbd5e1;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);

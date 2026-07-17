@@ -15,6 +15,8 @@ import {
 } from 'lucide-react'
 import { type FormEvent, useState } from 'react'
 import { DetailModal } from '@/shared/components/DetailModal'
+import { EducationModal } from '@/shared/components/EducationModal'
+import { ExperienceModal } from '@/shared/components/ExperienceModal'
 import { useLanguage } from '@/shared/contexts/LanguageContext'
 import {
   Carousel,
@@ -42,8 +44,8 @@ const MOCK_PROJECTS: ProjectCardData[] = [
       pt: 'Desenvolvido em Java 21 com Spring Framework. A arquitetura segue rigorosamente os princípios de Clean Architecture, utilizando PostgreSQL e Flyway para migrações. Foco absoluto em qualidade de código com alta cobertura de testes (JUnit, Mockito, JaCoCo) e deploy padronizado via Docker.',
       en: 'Developed in Java 21 with Spring Framework. The architecture strictly follows Clean Architecture principles, using PostgreSQL and Flyway for migrations. Absolute focus on code quality with high test coverage (JUnit, Mockito, JaCoCo) and standardized Docker deployment.',
     },
-    thumbnail: '/images/code-thumb-1.svg',
     gallery: [],
+    techIcons: ['devicon-java-plain colored', 'devicon-spring-original colored', 'devicon-postgresql-plain colored', 'devicon-docker-plain colored'],
   },
   {
     id: 'proj-2',
@@ -55,8 +57,8 @@ const MOCK_PROJECTS: ProjectCardData[] = [
       pt: 'Sistema distribuído para rastreamento de erros. Captura eventos de falha enviados de forma assíncrona via Apache Kafka, realiza a persistência segura no MySQL e expõe os dados através de uma API REST para análise e monitoramento em tempo real.',
       en: 'Distributed system for error tracking. Captures failure events sent asynchronously via Apache Kafka, securely persists them in MySQL, and exposes the data through a REST API for real-time analysis and monitoring.',
     },
-    thumbnail: '/images/code-thumb-2.svg',
     gallery: [],
+    techIcons: ['devicon-apachekafka-original colored', 'devicon-mysql-plain colored'],
   },
   {
     id: 'proj-3',
@@ -68,8 +70,8 @@ const MOCK_PROJECTS: ProjectCardData[] = [
       pt: 'Sistema corporativo robusto construído com Java 25 LTS e Spring Boot 4.0.4. Aplica Clean Architecture estrita e Domain-Driven Design (DDD), garantindo o isolamento total das regras de negócio sem dependência de frameworks externos. Inclui H2 Database e documentação via Swagger/OpenAPI.',
       en: 'Robust corporate system built with Java 25 LTS and Spring Boot 4.0.4. Applies strict Clean Architecture and Domain-Driven Design (DDD), ensuring total isolation of business rules without dependency on external frameworks. Includes H2 Database and Swagger/OpenAPI documentation.',
     },
-    thumbnail: '/images/code-thumb-3.svg',
     gallery: [],
+    techIcons: ['devicon-java-plain colored', 'devicon-spring-original colored'],
   },
   {
     id: 'proj-4',
@@ -277,8 +279,9 @@ interface ProjectCardData {
   dateMade: string
   description: { pt: string; en: string }
   link: string
-  thumbnail: string | null
+  thumbnail?: string | null
   gallery: string[]
+  techIcons?: string[]
 }
 
 interface ExperienceCardData {
@@ -311,12 +314,13 @@ function ContactForm() {
     const data = new FormData(form)
 
     try {
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const response = await fetch('https://formsubmit.co/ajax/luskahs@gmail.com', {
         method: 'POST',
         body: data,
         headers: { Accept: 'application/json' },
       })
-      if (response.ok) {
+      const result = await response.json()
+      if (result.success) {
         setStatus('success')
         form.reset()
       } else {
@@ -397,7 +401,7 @@ function ContactForm() {
 }
 
 interface ModalContent {
-  type: 'project' | 'experience'
+  type: 'project' | 'experience' | 'education'
   title: string
   description: string
   subtitle?: string
@@ -405,6 +409,8 @@ interface ModalContent {
   tags?: string[]
   gallery?: string[]
   link?: string
+  techIcons?: string[]
+  thumbnail?: string | null
 }
 
 function LandingPage() {
@@ -526,13 +532,27 @@ function LandingPage() {
                     tags: [],
                     gallery: project.gallery?.length ? project.gallery : undefined,
                     link: project.link || undefined,
+                    techIcons: project.techIcons,
+                    thumbnail: project.thumbnail,
                   })
                 }
                 className="group cursor-pointer overflow-hidden rounded-xl border border-border/50 bg-card shadow-xs transition-all duration-300 hover:border-primary/30 hover:shadow-md"
               >
                 <div className="grid md:grid-cols-5">
                   <div className="relative md:col-span-1">
-                    {project.thumbnail ? (
+                    {project.techIcons && project.techIcons.length > 0 ? (
+                      <div className="aspect-[4/3] w-full relative overflow-hidden rounded-t-2xl md:aspect-auto md:h-full md:rounded-tr-none md:rounded-bl-2xl bg-gradient-to-br from-slate-900 to-slate-950 border-b lg:border-b-0 lg:border-r border-slate-800 flex flex-wrap content-center items-center justify-center gap-4">
+                        <div className="absolute inset-0 bg-slate-500/10 blur-3xl" />
+                        {project.techIcons.map((iconClass, index) => (
+                          <div
+                            key={index}
+                            className="p-3 bg-slate-800/80 border border-slate-600/50 rounded-xl shadow-md flex items-center justify-center transition-transform hover:scale-110 z-10"
+                          >
+                            <i className={`${iconClass} text-4xl drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]`} />
+                          </div>
+                        ))}
+                      </div>
+                    ) : project.thumbnail ? (
                       <div className="aspect-[4/3] w-full relative overflow-hidden rounded-t-2xl md:aspect-auto md:h-full md:rounded-tr-none md:rounded-bl-2xl">
                         <img
                           src={project.thumbnail}
@@ -671,7 +691,18 @@ function LandingPage() {
                   <div className="hidden md:block md:w-1/2" />
 
                   <div className="ml-10 md:ml-0 md:w-1/2">
-                    <div className="rounded-xl border border-border/50 bg-card p-6 shadow-xs transition-all duration-300 hover:border-primary/30 hover:shadow-md">
+                    <div
+                      onClick={() =>
+                        setModalContent({
+                          type: 'education',
+                          title: edu.course[lang],
+                          description: edu.description[lang],
+                          subtitle: edu.institution,
+                          period: edu.period[lang],
+                        })
+                      }
+                      className="cursor-pointer rounded-xl border border-border/50 bg-card p-6 shadow-xs transition-all duration-300 hover:border-primary/30 hover:shadow-md"
+                    >
                       <div className="mb-1 flex items-center gap-2 text-xs text-muted-foreground">
                         <GraduationCap className="size-3.5" />
                         {edu.period[lang] || <span className="italic">{t('education.noDate')}</span>}
@@ -762,17 +793,42 @@ function LandingPage() {
         </p>
       </footer>
 
-      <DetailModal
-        isOpen={modalContent !== null}
-        onClose={() => setModalContent(null)}
-        title={modalContent?.title ?? ''}
-        description={modalContent?.description ?? ''}
-        subtitle={modalContent?.subtitle}
-        period={modalContent?.period}
-        tags={modalContent?.tags}
-        gallery={modalContent?.gallery}
-        link={modalContent?.link}
-      />
+      {modalContent?.type === 'project' && (
+        <DetailModal
+          isOpen={modalContent !== null}
+          onClose={() => setModalContent(null)}
+          title={modalContent?.title ?? ''}
+          description={modalContent?.description ?? ''}
+          subtitle={modalContent?.subtitle}
+          period={modalContent?.period}
+          gallery={modalContent?.gallery}
+          link={modalContent?.link}
+          techIcons={modalContent?.techIcons}
+          thumbnail={modalContent?.thumbnail}
+        />
+      )}
+
+      {modalContent?.type === 'experience' && (
+        <ExperienceModal
+          isOpen={modalContent !== null}
+          onClose={() => setModalContent(null)}
+          role={modalContent?.title ?? ''}
+          company={modalContent?.subtitle ?? ''}
+          period={modalContent?.period ?? ''}
+          description={modalContent?.description ?? ''}
+        />
+      )}
+
+      {modalContent?.type === 'education' && (
+        <EducationModal
+          isOpen={modalContent !== null}
+          onClose={() => setModalContent(null)}
+          course={modalContent?.title ?? ''}
+          institution={modalContent?.subtitle ?? ''}
+          period={modalContent?.period ?? ''}
+          description={modalContent?.description ?? ''}
+        />
+      )}
     </div>
   )
 }
