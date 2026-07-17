@@ -9,7 +9,7 @@ export const dictionaries: Record<Lang, Record<string, string>> = {
       'Engenheiro de soluções escaláveis da base de dados à nuvem. Com experiência em sistemas governamentais e plataformas corporativas de missão crítica, conecto infraestrutura sólida com inovação de alto impacto.',
     'hero.github': 'GitHub',
     'hero.linkedin': 'LinkedIn',
-    'projects.title': 'Projetos Recentes',
+    'projects.title': 'Projetos em Destaque',
     'projects.subtitle': 'Uma seleção de projetos que construí e para os quais contribuí.',
     'projects.filterDev': 'Projetos DEV',
     'projects.filterGeneral': 'Projetos Gerais',
