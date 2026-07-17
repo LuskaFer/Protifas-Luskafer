@@ -4,9 +4,9 @@ export const dictionaries: Record<Lang, Record<string, string>> = {
   pt: {
     'hero.badge': 'Full-Stack Java | Spring Boot | React',
     'hero.titleLine1': 'Construindo backends robustos',
-    'hero.titleHighlight': 'e voando para novas alturas',
+    'hero.titleHighlight': 'e ecossistemas resilientes',
     'hero.subtitle':
-      'Engenheiro de soluções escaláveis da nuvem ao cockpit. Com experiência em sistemas governamentais e plataformas adjacentes à aviação, conecto infraestrutura confiável com inovação de alto risco.',
+      'Engenheiro de soluções escaláveis da base de dados à nuvem. Com experiência em sistemas governamentais e plataformas corporativas de missão crítica, conecto infraestrutura sólida com inovação de alto impacto.',
     'hero.github': 'GitHub',
     'hero.linkedin': 'LinkedIn',
     'projects.title': 'Projetos Recentes',
@@ -21,6 +21,9 @@ export const dictionaries: Record<Lang, Record<string, string>> = {
     'projects.liveDemo': 'Live Demo',
     'experience.title': 'Experiência Profissional',
     'experience.subtitle': 'Minha jornada profissional e as empresas com as quais trabalhei.',
+    'education.title': 'Formação Acadêmica',
+    'education.subtitle': 'Minha trajetória acadêmica e certificações.',
+    'education.noDate': 'Sem data definida',
     'contact.title': 'Entre em Contato',
     'contact.subtitle': 'Tem um projeto em mente? Me mande uma mensagem!',
     'contact.nameLabel': 'Nome',
@@ -62,9 +65,9 @@ export const dictionaries: Record<Lang, Record<string, string>> = {
   en: {
     'hero.badge': 'Full-Stack Java | Spring Boot | React',
     'hero.titleLine1': 'Building robust backends',
-    'hero.titleHighlight': 'and soaring to new heights',
+    'hero.titleHighlight': 'and resilient ecosystems',
     'hero.subtitle':
-      'Engineering scalable solutions from the cloud to the cockpit. With experience across government systems and avionic-adjacent platforms, I bridge the gap between reliable infrastructure and high-stakes innovation.',
+      'Scalable solutions engineer from database to cloud. With experience in government systems and mission-critical enterprise platforms, I connect solid infrastructure with high-impact innovation.',
     'hero.github': 'GitHub',
     'hero.linkedin': 'LinkedIn',
     'projects.title': 'Latest Projects',
@@ -79,6 +82,9 @@ export const dictionaries: Record<Lang, Record<string, string>> = {
     'projects.liveDemo': 'Live Demo',
     'experience.title': 'Work Experience',
     'experience.subtitle': "My professional journey and the companies I've worked with.",
+    'education.title': 'Academic Formation',
+    'education.subtitle': 'My academic journey and certifications.',
+    'education.noDate': 'No date set',
     'contact.title': 'Contact Me',
     'contact.subtitle': 'Have a project in mind? Send me a message!',
     'contact.nameLabel': 'Name',

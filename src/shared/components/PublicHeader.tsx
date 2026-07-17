@@ -30,6 +30,13 @@ export function PublicHeader() {
         </Link>
         <Link
           to="/"
+          hash="education"
+          className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          {t('education.title', 'Education')}
+        </Link>
+        <Link
+          to="/"
           hash="experience"
           className="text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
