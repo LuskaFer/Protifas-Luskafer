@@ -4,9 +4,9 @@ export const dictionaries: Record<Lang, Record<string, string>> = {
   pt: {
     'hero.badge': 'Full-Stack Java | Spring Boot | React',
     'hero.titleLine1': 'Construindo backends robustos',
-    'hero.titleHighlight': 'e voando para novas alturas',
+    'hero.titleHighlight': 'e ecossistemas resilientes',
     'hero.subtitle':
-      'Engenheiro de soluções escaláveis da nuvem ao cockpit. Com experiência em sistemas governamentais e plataformas adjacentes à aviação, conecto infraestrutura confiável com inovação de alto risco.',
+      'Engenheiro de soluções escaláveis da base de dados à nuvem. Com experiência em sistemas governamentais e plataformas corporativas de missão crítica, conecto infraestrutura sólida com inovação de alto impacto.',
     'hero.github': 'GitHub',
     'hero.linkedin': 'LinkedIn',
     'projects.title': 'Projetos Recentes',
@@ -65,9 +65,9 @@ export const dictionaries: Record<Lang, Record<string, string>> = {
   en: {
     'hero.badge': 'Full-Stack Java | Spring Boot | React',
     'hero.titleLine1': 'Building robust backends',
-    'hero.titleHighlight': 'and soaring to new heights',
+    'hero.titleHighlight': 'and resilient ecosystems',
     'hero.subtitle':
-      'Engineering scalable solutions from the cloud to the cockpit. With experience across government systems and avionic-adjacent platforms, I bridge the gap between reliable infrastructure and high-stakes innovation.',
+      'Scalable solutions engineer from database to cloud. With experience in government systems and mission-critical enterprise platforms, I connect solid infrastructure with high-impact innovation.',
     'hero.github': 'GitHub',
     'hero.linkedin': 'LinkedIn',
     'projects.title': 'Latest Projects',
