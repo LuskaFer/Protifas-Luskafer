@@ -1,0 +1,364 @@
+import { useState } from 'react'
+import { Code2, ExternalLink, Lock } from 'lucide-react'
+import { useLanguage } from '@/shared/contexts/LanguageContext'
+import { DetailModal } from '@/shared/components/DetailModal'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shared/ui/carousel'
+
+interface ProjectCardData {
+  id: string
+  type: 'DEV' | 'GENERAL'
+  title: { pt: string; en: string }
+  dateMade: string
+  description: { pt: string; en: string }
+  link?: string
+  thumbnail?: string | null
+  gallery: string[]
+  techIcons?: string[]
+}
+
+const MOCK_PROJECTS: ProjectCardData[] = [
+  {
+    id: 'proj-1',
+    type: 'DEV',
+    title: { pt: 'Microserviço de Gestão de Clientes', en: 'Client Management Microservice' },
+    dateMade: '2024',
+    link: 'https://github.com/LuskaFer/mscliente---POS-TECH-FIAP',
+    description: {
+      pt: 'Desenvolvido em Java 21 com Spring Framework. A arquitetura segue rigorosamente os princípios de Clean Architecture, utilizando PostgreSQL e Flyway para migrações. Foco absoluto em qualidade de código com alta cobertura de testes (JUnit, Mockito, JaCoCo) e deploy padronizado via Docker.',
+      en: 'Developed in Java 21 with Spring Framework. The architecture strictly follows Clean Architecture principles, using PostgreSQL and Flyway for migrations. Absolute focus on code quality with high test coverage (JUnit, Mockito, JaCoCo) and standardized Docker deployment.',
+    },
+    gallery: [],
+    techIcons: ['devicon-java-plain colored', 'devicon-spring-original colored', 'devicon-postgresql-plain colored', 'devicon-docker-plain colored'],
+  },
+  {
+    id: 'proj-2',
+    type: 'DEV',
+    title: { pt: 'Microserviço Error Tracker', en: 'Error Tracker Microservice' },
+    dateMade: '2024',
+    link: 'https://github.com/LuskaFer/ms-error-tracker----POS-TECH-FIAP',
+    description: {
+      pt: 'Sistema distribuído para rastreamento de erros. Captura eventos de falha enviados de forma assíncrona via Apache Kafka, realiza a persistência segura no MySQL e expõe os dados através de uma API REST para análise e monitoramento em tempo real.',
+      en: 'Distributed system for error tracking. Captures failure events sent asynchronously via Apache Kafka, securely persists them in MySQL, and exposes the data through a REST API for real-time analysis and monitoring.',
+    },
+    gallery: [],
+    techIcons: ['devicon-apachekafka-original colored', 'devicon-mysql-plain colored'],
+  },
+  {
+    id: 'proj-3',
+    type: 'DEV',
+    title: { pt: 'ERP de Gestão de Projetos (Oracle)', en: 'Project Management ERP (Oracle)' },
+    dateMade: '2025',
+    link: 'https://github.com/LuskaFer/ORACLE----Gest-Proj',
+    description: {
+      pt: 'Sistema corporativo robusto construído com Java 25 LTS e Spring Boot 4.0.4. Aplica Clean Architecture estrita e Domain-Driven Design (DDD), garantindo o isolamento total das regras de negócio sem dependência de frameworks externos. Inclui H2 Database e documentação via Swagger/OpenAPI.',
+      en: 'Robust corporate system built with Java 25 LTS and Spring Boot 4.0.4. Applies strict Clean Architecture and Domain-Driven Design (DDD), ensuring total isolation of business rules without dependency on external frameworks. Includes H2 Database and Swagger/OpenAPI documentation.',
+    },
+    gallery: [],
+    techIcons: ['devicon-java-plain colored', 'devicon-spring-original colored'],
+  },
+  {
+    id: 'proj-4',
+    type: 'DEV',
+    title: { 
+      pt: 'Incubadora de Agentes IA (RAG & Learning Loop)', 
+      en: 'AI Agents Incubator (RAG & Learning Loop)' 
+    },
+    dateMade: '2026',
+    description: {
+      pt: 'Motor de Inteligência Artificial focado em aprendizado contínuo. Construído com Java 25 LTS e Spring Boot 4.0.4, o sistema aplica rigorosamente Clean Architecture e Domain-Driven Design (DDD). O backend utiliza LangChain4j, operando 100% localmente com banco H2 e armazenamento vetorial (InMemoryEmbeddingStore). Os fluxos principais incluem RAG Local e um Loop de Aprendizado, onde feedbacks positivos geram novos vetores de memória. O core business é totalmente agnóstico e isolado de frameworks externos.',
+      en: 'Artificial Intelligence engine focused on continuous learning. Built with Java 25 LTS and Spring Boot 4.0.4, the system strictly applies Clean Architecture and Domain-Driven Design (DDD). The backend utilizes LangChain4j, operating 100% locally with an H2 database and vector storage (InMemoryEmbeddingStore). Main flows include Local RAG and a Learning Loop, where positive feedback automatically generates new memory vectors. The core business is completely agnostic and isolated from external frameworks.'
+    },
+    gallery: [],
+    techIcons: [
+      'devicon-java-plain colored', 
+      'devicon-spring-original colored', 
+      'devicon-maven-plain colored'
+    ],
+  },
+  {
+    id: 'proj-5',
+    type: 'DEV',
+    title: { pt: 'Plataforma de Monitoramento', en: 'Monitoring Platform' },
+    dateMade: '2024',
+    description: {
+      pt: 'Sistema de monitoramento distribuído para microsserviços em produção. Coleta métricas em tempo real, agrega logs centralizados e dispara alertas inteligentes. Construído com Kafka, Elasticsearch e Grafana para visualização.',
+      en: 'Distributed monitoring system for production microservices. Collects real-time metrics, aggregates centralized logs, and triggers smart alerts. Built with Kafka, Elasticsearch and Grafana for visualization.',
+    },
+    gallery: [],
+    techIcons: ['devicon-apachekafka-original colored', 'devicon-elasticsearch-original colored', 'devicon-grafana-original colored'],
+  },
+  {
+    id: 'proj-6',
+    type: 'DEV',
+    title: { pt: 'API Gateway para Microsserviços', en: 'Microservices API Gateway' },
+    dateMade: '2025',
+
+    description: {
+      pt: 'Gateway de API unificado para orquestração de microsserviços Spring Boot. Implementa roteamento inteligente, balanceamento de carga, rate limiting e autenticação centralizada via JWT. Documentação interativa com Swagger/OpenAPI.',
+      en: 'Unified API gateway for Spring Boot microservice orchestration. Implements intelligent routing, load balancing, rate limiting and centralized JWT authentication. Interactive documentation with Swagger/OpenAPI.',
+    },
+    gallery: [],
+    techIcons: ['devicon-java-plain colored', 'devicon-spring-original colored', 'devicon-docker-plain colored'],
+  },
+  {
+    id: 'proj-7',
+    type: 'GENERAL',
+    title: { pt: 'Horta Autônoma Indoor (IoT)', en: 'Autonomous Indoor Garden (IoT)' },
+    dateMade: '2022',
+
+    description: {
+      pt: 'Projeto de automação e sustentabilidade. Integrei controladores smart (IoT) para gerenciar umidificadores, iluminação e um sistema automático de irrigação dentro de casa. Um estudo prático sobre necessidades ambientais e autossuficiência que rendeu vegetais e frutos reais.',
+      en: 'Automation and sustainability project. Integrated smart controllers (IoT) to manage humidifiers, lighting, and an automatic irrigation system indoors. A practical study on environmental needs and self-sufficiency that yielded real vegetables and fruits.',
+    },
+    thumbnail: '/images/horta.png',
+    gallery: [],
+  },
+  {
+    id: 'proj-8',
+    type: 'GENERAL',
+    title: { pt: 'Restauração: GSX F 1998', en: 'Restoration: GSX F 1998' },
+    dateMade: '2021',
+
+    description: {
+      pt: 'Restauração completa de uma moto adquirida sucateada. Com apoio familiar e usando IA para troubleshooting, refiz a elétrica, adaptei um painel digital tecnológico, reparei a mecânica (carburadores/freios) e criei novas carenagens, culminando na legalização total do veículo.',
+      en: "Complete restoration of a scrapped motorcycle. With family support and AI for troubleshooting, I rebuilt the electronics, adapted a tech digital dashboard, repaired the mechanics (carburetors/brakes), and created new fairings, culminating in the vehicle's full street legalization.",
+    },
+    thumbnail: '/images/moto2.jpg',
+    gallery: [],
+  },
+  {
+    id: 'proj-9',
+    type: 'GENERAL',
+    title: { pt: 'Restauração: Kawasaki ZX11 1995', en: 'Restoration: Kawasaki ZX11 1995' },
+    dateMade: '2023',
+
+    description: {
+      pt: 'Recuperação de uma moto inoperante com a parte elétrica destruída por ácido de bateria. Refiz o chicote, restaurei a carburação e adicionei upgrades (velocímetro digital, voltímetro, USB). Um projeto de paciência e precisão mecânica.',
+      en: 'Recovery of an inoperative motorcycle with battery-acid destroyed electronics. Rebuilt the wiring harness, restored the carburetors, and added upgrades (digital speedometer, voltmeter, USB). A project of patience and mechanical precision.',
+    },
+    thumbnail: '/images/moto1.jpg',
+    gallery: [],
+  },
+  {
+    id: 'proj-10',
+    type: 'GENERAL',
+    title: { pt: 'Estação Meteorológica IoT', en: 'IoT Weather Station' },
+    dateMade: '2023',
+
+    description: {
+      pt: 'Estação meteorológica caseira com sensores de temperatura, umidade, pressão e qualidade do ar. Os dados são coletados via ESP32 e enviados para um backend Node.js que os armazena e exibe em um dashboard React em tempo real.',
+      en: 'DIY weather station with temperature, humidity, pressure and air quality sensors. Data is collected via ESP32 and sent to a Node.js backend that stores and displays it on a real-time React dashboard.',
+    },
+    thumbnail: '/images/horta.png',
+    gallery: [],
+  },
+  {
+    id: 'proj-11',
+    type: 'GENERAL',
+    title: { pt: 'Impressora 3D Customizada', en: 'Custom 3D Printer' },
+    dateMade: '2022',
+
+    description: {
+      pt: 'Construção e calibração de uma impressora 3D CoreXY a partir de perfis de alumínio e componentes eletrônicos modulares. Inclui customização do firmware Marlin, nivelamento automático da mesa e integração com software de fatiamento.',
+      en: 'Assembly and calibration of a CoreXY 3D printer from aluminum profiles and modular electronic components. Includes Marlin firmware customization, auto bed leveling, and slicer software integration.',
+    },
+    thumbnail: '/images/moto2.jpg',
+    gallery: [],
+  },
+  {
+    id: 'proj-12',
+    type: 'GENERAL',
+    title: { pt: 'Servidor NAS Doméstico', en: 'Home NAS Server' },
+    dateMade: '2021',
+
+    description: {
+      pt: 'Montagem e configuração de um servidor NAS caseiro utilizando hardware reciclado e TrueNAS Scale. Implementação de RAID por software, backup automatizado, servidor multimídia Plex e acesso remoto via VPN.',
+      en: 'Assembly and configuration of a home NAS server using recycled hardware and TrueNAS Scale. Implements software RAID, automated backups, Plex media server, and remote access via VPN.',
+    },
+    thumbnail: '/images/moto1.jpg',
+    gallery: [],
+  },
+]
+
+export function ProjectsSection() {
+  const { t, lang } = useLanguage()
+  const [projectFilter, setProjectFilter] = useState<'DEV' | 'GENERAL'>('DEV')
+  const [modalContent, setModalContent] = useState<{
+    type: 'project'
+    title: string
+    description: string
+    subtitle: string
+    tags: string[]
+    gallery?: string[]
+    link?: string
+    techIcons?: string[]
+    thumbnail?: string | null
+  } | null>(null)
+
+  const filteredProjects = MOCK_PROJECTS.filter(p => p.type === projectFilter)
+  const allProjects = filteredProjects
+
+  return (
+    <>
+      <section id="projects" className="relative border-t border-border/50 bg-muted/30 px-4 py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              {t('projects.title')}
+            </h2>
+            <p className="mt-3 text-muted-foreground">{t('projects.subtitle')}</p>
+          </div>
+
+          <div className="mb-10 flex justify-center">
+            <div className="inline-flex rounded-lg border border-border bg-card p-1">
+              <button
+                type="button"
+                onClick={() => setProjectFilter('DEV')}
+                className={`rounded-md px-5 py-2 text-sm font-medium transition-all ${
+                  projectFilter === 'DEV'
+                    ? 'bg-primary text-primary-foreground shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {t('projects.filterDev')}
+              </button>
+              <button
+                type="button"
+                onClick={() => setProjectFilter('GENERAL')}
+                className={`rounded-md px-5 py-2 text-sm font-medium transition-all ${
+                  projectFilter === 'GENERAL'
+                    ? 'bg-primary text-primary-foreground shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {t('projects.filterGeneral')}
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {allProjects.map(project => (
+              <div
+                key={project.id}
+                onClick={() =>
+                  setModalContent({
+                    type: 'project',
+                    title: project.title[lang],
+                    description: project.description[lang],
+                    subtitle: project.dateMade,
+                    tags: [],
+                    gallery: project.gallery?.length ? project.gallery : undefined,
+                    link: project.link || undefined,
+                    techIcons: project.techIcons,
+                    thumbnail: project.thumbnail,
+                  })
+                }
+                className="group cursor-pointer overflow-hidden rounded-xl border border-border/50 bg-card shadow-xs transition-all duration-300 hover:border-primary/30 hover:shadow-md"
+              >
+                <div className="flex flex-col">
+                  <div className="relative w-full">
+                    {project.techIcons && project.techIcons.length > 0 ? (
+                      <div className="w-full h-48 bg-gradient-to-br from-slate-900 to-slate-950 border-b border-slate-800 flex flex-wrap content-center items-center justify-center gap-4">
+                        <div className="absolute inset-0 bg-slate-500/10 blur-3xl" />
+                        {project.techIcons.map((iconClass, index) => (
+                          <div
+                            key={index}
+                            className="p-3 bg-slate-800/80 border border-slate-600/50 rounded-xl shadow-md flex items-center justify-center transition-transform hover:scale-110 z-10"
+                          >
+                            <i className={`${iconClass} text-4xl drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]`} />
+                          </div>
+                        ))}
+                      </div>
+                    ) : project.thumbnail ? (
+                      <div className="w-full h-48 overflow-hidden">
+                        <img
+                          src={project.thumbnail}
+                          alt={`${project.title[lang]} thumbnail`}
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+                    ) : project.gallery && project.gallery.length > 0 ? (
+                      <Carousel opts={{ loop: true }} className="w-full h-48">
+                        <CarouselContent className="h-full">
+                          {project.gallery.map(img => (
+                            <CarouselItem key={img} className="h-full">
+                              <img
+                                src={img}
+                                alt={`${project.title[lang]} screenshot`}
+                                className="w-full h-full object-cover"
+                              />
+                            </CarouselItem>
+                          ))}
+                        </CarouselContent>
+                        <CarouselPrevious className="left-2 size-7" />
+                        <CarouselNext className="right-2 size-7" />
+                      </Carousel>
+                    ) : (
+                      <div className="flex w-full h-48 items-center justify-center bg-muted/50">
+                        <div className="flex flex-col items-center gap-2 text-muted-foreground">
+                          <Code2 className="size-8" />
+                          <span className="text-xs">{project.title[lang]}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col justify-between p-5">
+                    <div>
+                      <div className="mb-2 flex items-start justify-between gap-4">
+                        <h3 className="text-lg font-bold text-foreground">{project.title[lang]}</h3>
+                        <span className="shrink-0 rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[11px] font-medium text-primary">
+                          {project.type === 'DEV'
+                            ? t('projects.badgeDev')
+                            : t('projects.badgeGeneral')}
+                        </span>
+                      </div>
+                      <p className="mb-2 text-sm text-muted-foreground">{project.dateMade}</p>
+                      <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                        {project.description[lang]}
+                      </p>
+                    </div>
+                    <div className="flex gap-3">
+                      {project.link ? (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs font-medium text-primary transition-colors hover:text-primary-dark"
+                        >
+                          <Code2 className="size-3.5" />
+                          {t('projects.repository')}
+                          <ExternalLink className="size-3" />
+                        </a>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                          <Lock className="size-3.5" />
+                          {t('projects.private')}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {modalContent && (
+        <DetailModal
+          isOpen={modalContent !== null}
+          onClose={() => setModalContent(null)}
+          title={modalContent.title}
+          description={modalContent.description}
+          subtitle={modalContent.subtitle}
+          period={undefined}
+          gallery={modalContent.gallery}
+          link={modalContent.link}
+          techIcons={modalContent.techIcons}
+          thumbnail={modalContent.thumbnail}
+        />
+      )}
+    </>
+  )
+}
