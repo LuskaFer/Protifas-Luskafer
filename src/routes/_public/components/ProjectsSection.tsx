@@ -139,45 +139,45 @@ const MOCK_PROJECTS: ProjectCardData[] = [
     thumbnail: '/images/moto1.jpg',
     gallery: [],
   },
-  {
-    id: 'proj-10',
-    type: 'GENERAL',
-    title: { pt: 'Estação Meteorológica IoT', en: 'IoT Weather Station' },
-    dateMade: '2023',
+  // {
+  //   id: 'proj-10',
+  //   type: 'GENERAL',
+  //   title: { pt: 'Estação Meteorológica IoT', en: 'IoT Weather Station' },
+  //   dateMade: '2023',
 
-    description: {
-      pt: 'Estação meteorológica caseira com sensores de temperatura, umidade, pressão e qualidade do ar. Os dados são coletados via ESP32 e enviados para um backend Node.js que os armazena e exibe em um dashboard React em tempo real.',
-      en: 'DIY weather station with temperature, humidity, pressure and air quality sensors. Data is collected via ESP32 and sent to a Node.js backend that stores and displays it on a real-time React dashboard.',
-    },
-    thumbnail: '/images/horta.png',
-    gallery: [],
-  },
-  {
-    id: 'proj-11',
-    type: 'GENERAL',
-    title: { pt: 'Impressora 3D Customizada', en: 'Custom 3D Printer' },
-    dateMade: '2022',
+  //   description: {
+  //     pt: 'Estação meteorológica caseira com sensores de temperatura, umidade, pressão e qualidade do ar. Os dados são coletados via ESP32 e enviados para um backend Node.js que os armazena e exibe em um dashboard React em tempo real.',
+  //     en: 'DIY weather station with temperature, humidity, pressure and air quality sensors. Data is collected via ESP32 and sent to a Node.js backend that stores and displays it on a real-time React dashboard.',
+  //   },
+  //   thumbnail: '/images/horta.png',
+  //   gallery: [],
+  // },
+  // {
+  //   id: 'proj-11',
+  //   type: 'GENERAL',
+  //   title: { pt: 'Impressora 3D Customizada', en: 'Custom 3D Printer' },
+  //   dateMade: '2022',
 
-    description: {
-      pt: 'Construção e calibração de uma impressora 3D CoreXY a partir de perfis de alumínio e componentes eletrônicos modulares. Inclui customização do firmware Marlin, nivelamento automático da mesa e integração com software de fatiamento.',
-      en: 'Assembly and calibration of a CoreXY 3D printer from aluminum profiles and modular electronic components. Includes Marlin firmware customization, auto bed leveling, and slicer software integration.',
-    },
-    thumbnail: '/images/moto2.jpg',
-    gallery: [],
-  },
-  {
-    id: 'proj-12',
-    type: 'GENERAL',
-    title: { pt: 'Servidor NAS Doméstico', en: 'Home NAS Server' },
-    dateMade: '2021',
+  //   description: {
+  //     pt: 'Construção e calibração de uma impressora 3D CoreXY a partir de perfis de alumínio e componentes eletrônicos modulares. Inclui customização do firmware Marlin, nivelamento automático da mesa e integração com software de fatiamento.',
+  //     en: 'Assembly and calibration of a CoreXY 3D printer from aluminum profiles and modular electronic components. Includes Marlin firmware customization, auto bed leveling, and slicer software integration.',
+  //   },
+  //   thumbnail: '/images/moto2.jpg',
+  //   gallery: [],
+  // },
+  // {
+  //   id: 'proj-12',
+  //   type: 'GENERAL',
+  //   title: { pt: 'Servidor NAS Doméstico', en: 'Home NAS Server' },
+  //   dateMade: '2021',
 
-    description: {
-      pt: 'Montagem e configuração de um servidor NAS caseiro utilizando hardware reciclado e TrueNAS Scale. Implementação de RAID por software, backup automatizado, servidor multimídia Plex e acesso remoto via VPN.',
-      en: 'Assembly and configuration of a home NAS server using recycled hardware and TrueNAS Scale. Implements software RAID, automated backups, Plex media server, and remote access via VPN.',
-    },
-    thumbnail: '/images/moto1.jpg',
-    gallery: [],
-  },
+  //   description: {
+  //     pt: 'Montagem e configuração de um servidor NAS caseiro utilizando hardware reciclado e TrueNAS Scale. Implementação de RAID por software, backup automatizado, servidor multimídia Plex e acesso remoto via VPN.',
+  //     en: 'Assembly and configuration of a home NAS server using recycled hardware and TrueNAS Scale. Implements software RAID, automated backups, Plex media server, and remote access via VPN.',
+  //   },
+  //   thumbnail: '/images/moto1.jpg',
+  //   gallery: [],
+  // },
 ]
 
 export function ProjectsSection() {
