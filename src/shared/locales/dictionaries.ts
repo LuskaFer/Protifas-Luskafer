@@ -3,7 +3,7 @@ export type Lang = 'pt' | 'en'
 export const dictionaries: Record<Lang, Record<string, string>> = {
   pt: {
     'hero.badge': 'Full-Stack Java | Spring Boot | React',
-    'hero.titleLine1': 'Construindo backends robustos',
+    'hero.titleLine1': 'Construindo aplicações robustas',
     'hero.titleHighlight': 'e ecossistemas resilientes',
     'hero.subtitle':
       'Engenheiro de soluções escaláveis da base de dados à nuvem. Com experiência em sistemas governamentais e plataformas corporativas de missão crítica, conecto infraestrutura sólida com inovação de alto impacto.',

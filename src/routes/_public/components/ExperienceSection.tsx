@@ -33,7 +33,7 @@ const MOCK_EXPERIENCES: ExperienceCardData[] = [
   },
   {
     id: 'exp-2',
-    role: { pt: 'Desenvolvedor Front-End', en: 'Front-End Developer' },
+    role: { pt: 'Freelance | Desenvolvedor Front-End', en: 'Front-End Developer' },
     company: 'DoesWork',
     period: { pt: 'Julho 2023 - Dezembro 2023', en: 'July 2023 - December 2023' },
     description: {
