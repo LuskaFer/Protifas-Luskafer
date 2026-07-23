@@ -16,8 +16,9 @@ export function PublicHeader() {
 
   return (
     <header className="fixed top-0 right-0 left-0 z-50 flex items-center justify-between border-b border-border/50 bg-background/80 px-4 py-3 backdrop-blur-md sm:px-6">
-      <a href="/" className="text-sm font-bold tracking-tight text-foreground">
-        LF
+      <a href="/" className="flex items-center gap-2 text-sm font-bold tracking-tight text-foreground">
+        <img src="/gemini-svg_lf.svg" alt="LF" className="size-5" />
+        
       </a>
 
       <nav className="hidden items-center gap-6 sm:flex">
