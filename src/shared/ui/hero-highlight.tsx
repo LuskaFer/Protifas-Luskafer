@@ -34,8 +34,8 @@ export function HeroHighlight({ children, className, containerClassName }: HeroH
           background: useMotionTemplate`
             radial-gradient(
               500px circle at ${mouseX}px ${mouseY}px,
-              hsl(215 10% 60% / 0.15) 0%,
-              hsl(215 10% 60% / 0.05) 40%,
+              hsl(215 10% 60% / 0.45) 0%,
+              hsl(215 10% 60% / 0.15) 40%,
               transparent 70%
             )
           `,
