@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Code2, ExternalLink, Lock } from 'lucide-react'
+import { Code2, ExternalLink, Lock, Users } from 'lucide-react'
 import { useLanguage } from '@/shared/contexts/LanguageContext'
 import { DetailModal } from '@/shared/components/DetailModal'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shared/ui/carousel'
@@ -7,6 +7,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 interface ProjectCardData {
   id: string
   type: 'DEV' | 'GENERAL'
+  order: number
   title: { pt: string; en: string }
   dateMade: string
   description: { pt: string; en: string }
@@ -14,12 +15,14 @@ interface ProjectCardData {
   thumbnail?: string | null
   gallery: string[]
   techIcons?: string[]
+  collab?: boolean
 }
 
 const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-1',
     type: 'DEV',
+    order: 1,
     title: { pt: 'Microserviço de Gestão de Clientes', en: 'Client Management Microservice' },
     dateMade: '2024',
     link: 'https://github.com/LuskaFer/mscliente---POS-TECH-FIAP',
@@ -29,23 +32,12 @@ const MOCK_PROJECTS: ProjectCardData[] = [
     },
     gallery: [],
     techIcons: ['devicon-java-plain colored', 'devicon-spring-original colored', 'devicon-postgresql-plain colored', 'devicon-docker-plain colored'],
+    collab: true,
   },
   {
     id: 'proj-2',
     type: 'DEV',
-    title: { pt: 'Microserviço Error Tracker', en: 'Error Tracker Microservice' },
-    dateMade: '2024',
-    link: 'https://github.com/LuskaFer/ms-error-tracker----POS-TECH-FIAP',
-    description: {
-      pt: 'Sistema distribuído para rastreamento de erros. Captura eventos de falha enviados de forma assíncrona via Apache Kafka, realiza a persistência segura no MySQL e expõe os dados através de uma API REST para análise e monitoramento em tempo real.',
-      en: 'Distributed system for error tracking. Captures failure events sent asynchronously via Apache Kafka, securely persists them in MySQL, and exposes the data through a REST API for real-time analysis and monitoring.',
-    },
-    gallery: [],
-    techIcons: ['devicon-apachekafka-original colored', 'devicon-mysql-plain colored'],
-  },
-  {
-    id: 'proj-3',
-    type: 'DEV',
+    order: 2,
     title: { pt: 'ERP de Gestão de Projetos (Oracle)', en: 'Project Management ERP (Oracle)' },
     dateMade: '2025',
     link: 'https://github.com/LuskaFer/ORACLE----Gest-Proj',
@@ -57,8 +49,9 @@ const MOCK_PROJECTS: ProjectCardData[] = [
     techIcons: ['devicon-java-plain colored', 'devicon-spring-original colored'],
   },
   {
-    id: 'proj-4',
+    id: 'proj-3',
     type: 'DEV',
+    order: 3,
     title: { 
       pt: 'Incubadora de Agentes IA (RAG & Learning Loop)', 
       en: 'AI Agents Incubator (RAG & Learning Loop)' 
@@ -76,33 +69,79 @@ const MOCK_PROJECTS: ProjectCardData[] = [
     ],
   },
   {
-    id: 'proj-5',
+    id: 'proj-reserva-salas-postech',
     type: 'DEV',
-    title: { pt: 'Plataforma de Monitoramento', en: 'Monitoring Platform' },
+    order: 4,
+    title: { 
+      pt: 'API de Gestão e Reserva de Salas', 
+      en: 'Room Management & Reservation API' 
+    },
     dateMade: '2024',
+    link: 'https://github.com/LuskaFer/Sistema-De-Reserva-De-Salas---POS-TECH-FIAP',
     description: {
-      pt: 'Sistema de monitoramento distribuído para microsserviços em produção. Coleta métricas em tempo real, agrega logs centralizados e dispara alertas inteligentes. Construído com Kafka, Elasticsearch e Grafana para visualização.',
-      en: 'Distributed monitoring system for production microservices. Collects real-time metrics, aggregates centralized logs, and triggers smart alerts. Built with Kafka, Elasticsearch and Grafana for visualization.',
+      pt: 'API RESTful construída com Java 17 e Spring Boot para gerenciar o ciclo de vida completo de alocação de espaços. O sistema orquestra fluxos de Usuários, Salas, Reservas e Feedbacks. A arquitetura segue rigorosamente o padrão de camadas (Controllers, Services, DTOs e Entities), garantindo separação de responsabilidades e tratamento global de exceções. Inclui banco de dados em memória (H2) com scripts SQL de pré-carga para automação de ambiente e coleções do Postman estruturadas para testes de integração rápidos.',
+      en: 'RESTful API built with Java 17 and Spring Boot to manage the complete lifecycle of space allocation. The system orchestrates flows for Users, Rooms, Reservations, and Feedbacks. The architecture strictly follows the layered pattern (Controllers, Services, DTOs, and Entities), ensuring separation of concerns and global exception handling. It includes an in-memory database (H2) with pre-load SQL scripts for environment automation and structured Postman collections for rapid integration testing.'
     },
     gallery: [],
-    techIcons: ['devicon-apachekafka-original colored', 'devicon-elasticsearch-original colored', 'devicon-grafana-original colored'],
+    techIcons: [
+      'devicon-java-plain colored', 
+      'devicon-spring-original colored', 
+      'devicon-maven-plain colored',
+      'devicon-postman-plain colored'
+    ],
+    collab: true,
+  },
+  {
+    id: 'proj-5',
+    type: 'DEV',
+    order: 5,
+    title: { 
+      pt: 'API Gateway - Ecossistema Microsserviços', 
+      en: 'API Gateway - Microservices Ecosystem' 
+    },
+    dateMade: '2025',
+    link: 'https://github.com/LuskaFer/api-gateway----POS-TECH-FIAP',
+    description: {
+      pt: 'Gateway de API unificado construído com Spring Cloud Gateway e Java 17 para orquestração da arquitetura de microsserviços da pós-graduação (POS-TECH FIAP). Atua como ponto de entrada centralizado, realizando o roteamento HTTP inteligente para 6 serviços distintos (Clientes, Produtos, Pedidos, Pagamentos e Estoque). Desenvolvido sob princípios modulares de Clean Architecture, suporta parametrização via variáveis de ambiente e possui deploy conteinerizado via Docker.',
+      en: 'Unified API Gateway built with Spring Cloud Gateway and Java 17 to orchestrate the postgraduate microservices architecture (POS-TECH FIAP). It acts as a centralized entry point, performing intelligent HTTP routing to 6 distinct services (Clients, Products, Orders, Payments, and Inventory). Developed under modular Clean Architecture principles, it supports environment variable configuration and features containerized deployment via Docker.'
+    },
+    gallery: [],
+    techIcons: [
+      'devicon-java-plain colored', 
+      'devicon-spring-original colored', 
+      'devicon-docker-plain colored',
+      'devicon-maven-plain colored'
+    ],
+    collab: true,
   },
   {
     id: 'proj-6',
     type: 'DEV',
-    title: { pt: 'API Gateway para Microsserviços', en: 'Microservices API Gateway' },
+    order: 6,
+    title: { 
+      pt: 'Microserviço Error Tracker (Event-Driven)', 
+      en: 'Error Tracker Microservice (Event-Driven)' 
+    },
     dateMade: '2025',
-
+    link: 'https://github.com/LuskaFer/ms-error-tracker----POS-TECH-FIAP',
     description: {
-      pt: 'Gateway de API unificado para orquestração de microsserviços Spring Boot. Implementa roteamento inteligente, balanceamento de carga, rate limiting e autenticação centralizada via JWT. Documentação interativa com Swagger/OpenAPI.',
-      en: 'Unified API gateway for Spring Boot microservice orchestration. Implements intelligent routing, load balancing, rate limiting and centralized JWT authentication. Interactive documentation with Swagger/OpenAPI.',
+      pt: 'Microserviço focado em observabilidade e resiliência, desenvolvido com Spring Boot 3.5. Atua como um consumidor assíncrono conectado ao Apache Kafka, capturando eventos de falha em tempo real. O sistema valida e desserializa o payload JSON, persistindo as trilhas de auditoria em um banco MySQL via Spring Data JPA (com migrações gerenciadas pelo Flyway). Além do processamento em background, expõe uma API REST para consulta dos logs. Todo o ecossistema é orquestrado localmente via Docker Compose, com alta cobertura de testes (JUnit 5/Mockito).',
+      en: 'Microservice focused on observability and resilience, developed with Spring Boot 3.5. It acts as an asynchronous consumer connected to Apache Kafka, capturing failure events in real-time. The system validates and deserializes the JSON payload, persisting audit trails in a MySQL database via Spring Data JPA (with migrations managed by Flyway). Alongside background processing, it exposes a REST API for querying logs. The entire ecosystem is orchestrated locally via Docker Compose, backed by high test coverage (JUnit 5/Mockito).'
     },
     gallery: [],
-    techIcons: ['devicon-java-plain colored', 'devicon-spring-original colored', 'devicon-docker-plain colored'],
+    techIcons: [
+      'devicon-java-plain colored', 
+      'devicon-spring-original colored', 
+      'devicon-apachekafka-original colored',
+      'devicon-mysql-plain colored',
+      'devicon-docker-plain colored'
+    ],
+    collab: true,
   },
   {
     id: 'proj-7',
     type: 'GENERAL',
+    order: 4,
     title: { pt: 'Horta Autônoma Indoor (IoT)', en: 'Autonomous Indoor Garden (IoT)' },
     dateMade: '2022',
 
@@ -116,6 +155,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-8',
     type: 'GENERAL',
+    order: 1,
     title: { pt: 'Restauração: GSX F 1998', en: 'Restoration: GSX F 1998' },
     dateMade: '2019',
 
@@ -128,6 +168,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-9',
     type: 'GENERAL',
+    order: 2,
     title: { pt: 'Restauração: Kawasaki ZX11 1995', en: 'Restoration: Kawasaki ZX11 1995' },
     dateMade: '2023',
 
@@ -141,6 +182,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-10',
     type: 'GENERAL',
+    order: 3,
     title: { 
       pt: 'Restauração Elétrica: Suzuki Intruder 125 (2008)', 
       en: 'Electrical Restoration: Suzuki Intruder 125 (2008)' 
@@ -170,7 +212,7 @@ export function ProjectsSection() {
     thumbnail?: string | null
   } | null>(null)
 
-  const filteredProjects = MOCK_PROJECTS.filter(p => p.type === projectFilter)
+  const filteredProjects = MOCK_PROJECTS.filter(p => p.type === projectFilter).sort((a, b) => a.order - b.order)
   const allProjects = filteredProjects
 
   return (
@@ -294,7 +336,7 @@ export function ProjectsSection() {
                       </p>
                     </div>
                     {project.type === 'DEV' && (
-                      <div className="flex gap-3">
+                      <div className="flex flex-wrap items-center gap-3">
                         {project.link ? (
                           <a
                             href={project.link}
@@ -310,6 +352,12 @@ export function ProjectsSection() {
                           <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
                             <Lock className="size-3.5" />
                             {t('projects.private')}
+                          </span>
+                        )}
+                        {project.collab && (
+                          <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-0.5 text-[11px] font-medium text-amber-500">
+                            <Users className="size-3" />
+                            Collab
                           </span>
                         )}
                       </div>
