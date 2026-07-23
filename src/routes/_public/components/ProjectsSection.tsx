@@ -293,25 +293,27 @@ export function ProjectsSection() {
                         {project.description[lang]}
                       </p>
                     </div>
-                    <div className="flex gap-3">
-                      {project.link ? (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs font-medium text-primary transition-colors hover:text-primary-dark"
-                        >
-                          <Code2 className="size-3.5" />
-                          {t('projects.repository')}
-                          <ExternalLink className="size-3" />
-                        </a>
-                      ) : (
-                        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-                          <Lock className="size-3.5" />
-                          {t('projects.private')}
-                        </span>
-                      )}
-                    </div>
+                    {project.type === 'DEV' && (
+                      <div className="flex gap-3">
+                        {project.link ? (
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs font-medium text-primary transition-colors hover:text-primary-dark"
+                          >
+                            <Code2 className="size-3.5" />
+                            {t('projects.repository')}
+                            <ExternalLink className="size-3" />
+                          </a>
+                        ) : (
+                          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                            <Lock className="size-3.5" />
+                            {t('projects.private')}
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
