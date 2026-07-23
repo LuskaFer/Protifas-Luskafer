@@ -107,13 +107,13 @@ export function DetailModal({
                       '/images/my-photo.jpg',
                       'https://imgur.com/abc123.jpg',
                     ]
-                  Supports up to 6 images, local paths or external URLs.
+                   Supports up to 15 images, local paths or external URLs.
                   ═══════════════════════════════════════════════════════════════ */}
               {gallery && gallery.length > 0 && (
                 <div className="mt-10">
                   <h3 className="text-xl font-semibold text-foreground mb-4">Galeria do Projeto</h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {gallery.slice(0, 6).map((imgUrl, idx) => (
+                    {gallery.slice(0, 15).map((imgUrl, idx) => (
                       <a
                         key={idx}
                         href={imgUrl}

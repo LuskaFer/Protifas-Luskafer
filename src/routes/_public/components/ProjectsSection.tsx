@@ -117,14 +117,13 @@ const MOCK_PROJECTS: ProjectCardData[] = [
     id: 'proj-8',
     type: 'GENERAL',
     title: { pt: 'Restauração: GSX F 1998', en: 'Restoration: GSX F 1998' },
-    dateMade: '2021',
+    dateMade: '2019',
 
     description: {
-      pt: 'Restauração completa de uma moto adquirida sucateada. Com apoio familiar e usando IA para troubleshooting, refiz a elétrica, adaptei um painel digital tecnológico, reparei a mecânica (carburadores/freios) e criei novas carenagens, culminando na legalização total do veículo.',
-      en: "Complete restoration of a scrapped motorcycle. With family support and AI for troubleshooting, I rebuilt the electronics, adapted a tech digital dashboard, repaired the mechanics (carburetors/brakes), and created new fairings, culminating in the vehicle's full street legalization.",
-    },
-    thumbnail: '/images/moto2.jpg',
-    gallery: [],
+    pt: 'Restauração de uma moto inoperante, adquirida completamente "depenada", sem as carenagens e sem a parte frontal. Baseado puramente na leitura minuciosa de mapas elétricos originais, reconstruí a elétrica do zero e integrei um painel digital. O projeto exigiu reparos mecânicos (carburadores e freios), funilaria e design. A rabeta foi customizada sob medida sem qualquer alteração no quadro original, graças a um trabalho magistral de tapeçaria feito pelo meu pai através da sua empresa, Rockabilly (referência no ramo até hoje). O projeto culminou no funcionamento impecável e na legalização total do veículo.',
+    en: 'Restoration of an inoperative motorcycle, acquired completely stripped of its front end and fairings. Relying purely on the meticulous reading of original electrical diagrams, I rebuilt the wiring harness from scratch and integrated a digital dashboard. The project required mechanical repairs (carburetors and brakes), bodywork, and custom design. The tail section was fully customized without altering the original frame, featuring masterful upholstery work by my father through his company, Rockabilly (a specialized shop still operating today). The project culminated in the flawless operation and full street legalization of the vehicle.'},
+    thumbnail: '/images/GSX/1.jpeg',
+    gallery: ['/images/GSX/1.jpeg', '/images/GSX/2.jpeg', '/images/GSX/3.jpeg', '/images/GSX/4.jpeg','/images/GSX/5.jpeg','/images/GSX/6.jpeg','/images/GSX/7.jpeg','/images/GSX/8.jpeg','/images/GSX/9.jpeg'],
   },
   {
     id: 'proj-9',
@@ -136,48 +135,24 @@ const MOCK_PROJECTS: ProjectCardData[] = [
       pt: 'Recuperação de uma moto inoperante com a parte elétrica destruída por ácido de bateria. Refiz o chicote, restaurei a carburação e adicionei upgrades (velocímetro digital, voltímetro, USB). Um projeto de paciência e precisão mecânica.',
       en: 'Recovery of an inoperative motorcycle with battery-acid destroyed electronics. Rebuilt the wiring harness, restored the carburetors, and added upgrades (digital speedometer, voltmeter, USB). A project of patience and mechanical precision.',
     },
-    thumbnail: '/images/moto1.jpg',
-    gallery: [],
+    thumbnail: '/images/ZX/1.jpeg',
+    gallery: ['/images/ZX/1.jpeg', '/images/ZX/2.jpeg', '/images/ZX/3.jpeg', '/images/ZX/4.jpeg', '/images/ZX/5.jpeg', '/images/ZX/6.jpeg', '/images/ZX/7.jpeg', '/images/ZX/8.jpg'],
   },
-  // {
-  //   id: 'proj-10',
-  //   type: 'GENERAL',
-  //   title: { pt: 'Estação Meteorológica IoT', en: 'IoT Weather Station' },
-  //   dateMade: '2023',
-
-  //   description: {
-  //     pt: 'Estação meteorológica caseira com sensores de temperatura, umidade, pressão e qualidade do ar. Os dados são coletados via ESP32 e enviados para um backend Node.js que os armazena e exibe em um dashboard React em tempo real.',
-  //     en: 'DIY weather station with temperature, humidity, pressure and air quality sensors. Data is collected via ESP32 and sent to a Node.js backend that stores and displays it on a real-time React dashboard.',
-  //   },
-  //   thumbnail: '/images/horta.png',
-  //   gallery: [],
-  // },
-  // {
-  //   id: 'proj-11',
-  //   type: 'GENERAL',
-  //   title: { pt: 'Impressora 3D Customizada', en: 'Custom 3D Printer' },
-  //   dateMade: '2022',
-
-  //   description: {
-  //     pt: 'Construção e calibração de uma impressora 3D CoreXY a partir de perfis de alumínio e componentes eletrônicos modulares. Inclui customização do firmware Marlin, nivelamento automático da mesa e integração com software de fatiamento.',
-  //     en: 'Assembly and calibration of a CoreXY 3D printer from aluminum profiles and modular electronic components. Includes Marlin firmware customization, auto bed leveling, and slicer software integration.',
-  //   },
-  //   thumbnail: '/images/moto2.jpg',
-  //   gallery: [],
-  // },
-  // {
-  //   id: 'proj-12',
-  //   type: 'GENERAL',
-  //   title: { pt: 'Servidor NAS Doméstico', en: 'Home NAS Server' },
-  //   dateMade: '2021',
-
-  //   description: {
-  //     pt: 'Montagem e configuração de um servidor NAS caseiro utilizando hardware reciclado e TrueNAS Scale. Implementação de RAID por software, backup automatizado, servidor multimídia Plex e acesso remoto via VPN.',
-  //     en: 'Assembly and configuration of a home NAS server using recycled hardware and TrueNAS Scale. Implements software RAID, automated backups, Plex media server, and remote access via VPN.',
-  //   },
-  //   thumbnail: '/images/moto1.jpg',
-  //   gallery: [],
-  // },
+  {
+    id: 'proj-10',
+    type: 'GENERAL',
+    title: { 
+      pt: 'Restauração Elétrica: Suzuki Intruder 125 (2008)', 
+      en: 'Electrical Restoration: Suzuki Intruder 125 (2008)' 
+    },
+    dateMade: '2019', 
+    description: {
+      pt: 'Resgate de uma moto que sofreu um colapso elétrico severo após o proprietário usar um clipe de papel para contornar um fusível queimado. O curto-circuito derreteu mais de 50% do chicote principal. Utilizando o diagrama elétrico original, refiz a fiação de ponta a ponta com extrema precisão, restaurando a segurança do sistema. Aproveitei a nova infraestrutura para dimensionar e instalar dois faróis auxiliares. Um projeto de alta complexidade técnica que culminou no funcionamento perfeito da motocicleta.',
+      en: 'Rescue of a motorcycle that suffered a severe electrical collapse after the owner used a paperclip to bypass a blown fuse. The short circuit melted over 50% of the main wiring harness. Using the original electrical diagram, I completely rebuilt the wiring from end to end with extreme precision, restoring the system\'s safety. I leveraged the new infrastructure to design and install two auxiliary headlights. A project of high technical complexity that culminated in the flawless operation of the motorcycle.'
+    },
+    thumbnail: '/images/intruder 125/1.jpeg', // Coloque o caminho da sua imagem aqui
+    gallery: ['/images/intruder 125/2.jpeg','/images/intruder 125/3.jpeg','/images/intruder 125/4.jpeg','/images/intruder 125/5.jpeg','/images/intruder 125/6.jpeg','/images/intruder 125/7.jpeg','/images/intruder 125/8.jpeg','/images/intruder 125/9.jpeg','/images/intruder 125/10.jpeg','/images/intruder 125/11.jpeg','/images/intruder 125/12.jpeg','/images/intruder 125/13.jpeg',], 
+  },
 ]
 
 export function ProjectsSection() {
