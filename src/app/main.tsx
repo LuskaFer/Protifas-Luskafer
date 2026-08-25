@@ -9,6 +9,8 @@ import '@/index.css'
 const rootElement = document.getElementById('root')
 if (!rootElement) throw new Error('Root element not found')
 
+document.documentElement.dataset.layout = 'terminal'
+
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>

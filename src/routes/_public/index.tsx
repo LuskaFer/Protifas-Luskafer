@@ -11,7 +11,7 @@ export const Route = createFileRoute('/_public/')({
 
 function LandingPage() {
   return (
-    <div className="min-h-screen bg-background pt-14">
+    <div className="portfolio-preview min-h-screen bg-background pt-14">
       <HeroSection />
       <ProjectsSection />
       <EducationSection />

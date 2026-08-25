@@ -3,6 +3,7 @@ import { Code2, ExternalLink, Lock, Users } from 'lucide-react'
 import { useLanguage } from '@/shared/contexts/LanguageContext'
 import { DetailModal } from '@/shared/components/DetailModal'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shared/ui/carousel'
+import { SectionAtmosphere } from './SectionAtmosphere'
 
 interface ProjectCardData {
   id: string
@@ -218,6 +219,7 @@ export function ProjectsSection() {
   return (
     <>
       <section id="projects" className="relative border-t border-border/50 bg-muted/30 px-4 py-24">
+        <SectionAtmosphere variant="projects" />
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 text-center">
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">

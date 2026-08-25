@@ -1,12 +1,14 @@
 import { ArrowUpRight, Code2, Globe } from 'lucide-react'
 import { useLanguage } from '@/shared/contexts/LanguageContext'
 import { HeroHighlight, Highlight } from '@/shared/ui/hero-highlight'
+import { TerminalHeroBackdrop } from './TerminalHeroBackdrop'
 
 export function HeroSection() {
   const { t } = useLanguage()
 
   return (
     <HeroHighlight containerClassName="min-h-screen" className="px-4">
+      <TerminalHeroBackdrop />
       <div className="mx-auto max-w-5xl text-center">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/50 bg-muted/50 px-4 py-1.5 text-xs text-muted-foreground">
           <span className="relative flex size-2">

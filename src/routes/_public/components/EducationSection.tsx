@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { GraduationCap } from 'lucide-react'
 import { useLanguage } from '@/shared/contexts/LanguageContext'
 import { EducationModal } from '@/shared/components/EducationModal'
+import { SectionAtmosphere } from './SectionAtmosphere'
 
 interface EducationCardData {
   id: string
@@ -103,7 +104,8 @@ export function EducationSection() {
 
   return (
     <>
-      <section id="education" className="border-t border-border/50 px-4 py-24">
+      <section id="education" className="relative border-t border-border/50 px-4 py-24">
+        <SectionAtmosphere variant="education" />
         <div className="mx-auto max-w-4xl">
           <div className="mb-16 text-center">
             <div className="mb-4 inline-flex size-12 items-center justify-center rounded-2xl bg-primary/10">

@@ -1,6 +1,7 @@
 import { type FormEvent, useState } from 'react'
 import { CheckCircle2, Loader2, Mail, Send } from 'lucide-react'
 import { useLanguage } from '@/shared/contexts/LanguageContext'
+import { SectionAtmosphere } from './SectionAtmosphere'
 
 function ContactForm() {
   const { t } = useLanguage()
@@ -104,7 +105,8 @@ export function ContactSection() {
 
   return (
     <>
-      <section id="contact" className="border-t border-border/50 bg-muted/30 px-4 py-24">
+      <section id="contact" className="relative border-t border-border/50 bg-muted/30 px-4 py-24">
+        <SectionAtmosphere variant="contact" />
         <div className="mx-auto max-w-lg">
           <div className="mb-12 text-center">
             <div className="mb-4 inline-flex size-12 items-center justify-center rounded-2xl bg-primary/10">

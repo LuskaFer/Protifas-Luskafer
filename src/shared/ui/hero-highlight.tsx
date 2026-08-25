@@ -27,15 +27,15 @@ export function HeroHighlight({ children, className, containerClassName }: HeroH
       onMouseMove={handleMouseMove}
       role="none"
     >
-      <div className="pointer-events-none absolute inset-0 bg-dot-thick-neutral-300 dark:bg-dot-thick-neutral-800" />
+      <div className="hero-dot-grid pointer-events-none absolute inset-0 bg-dot-thick-neutral-300 dark:bg-dot-thick-neutral-800" />
       <motion.div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-500"
+        className="hero-pointer-glow pointer-events-none absolute inset-0 transition-opacity duration-500"
         style={{
           background: useMotionTemplate`
             radial-gradient(
               500px circle at ${mouseX}px ${mouseY}px,
-              hsl(215 10% 60% / 0.45) 0%,
-              hsl(215 10% 60% / 0.15) 40%,
+              color-mix(in srgb, var(--primary) 44%, transparent) 0%,
+              color-mix(in srgb, var(--primary) 14%, transparent) 42%,
               transparent 70%
             )
           `,

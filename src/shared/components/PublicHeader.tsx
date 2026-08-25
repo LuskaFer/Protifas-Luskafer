@@ -21,7 +21,7 @@ export function PublicHeader() {
         
       </a>
 
-      <nav className="hidden items-center gap-6 sm:flex">
+      <nav className="hidden items-center gap-4 lg:flex xl:gap-6">
         <Link
           to="/"
           hash="projects"

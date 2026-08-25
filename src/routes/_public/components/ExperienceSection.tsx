@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Calendar } from 'lucide-react'
 import { useLanguage } from '@/shared/contexts/LanguageContext'
 import { ExperienceModal } from '@/shared/components/ExperienceModal'
+import { SectionAtmosphere } from './SectionAtmosphere'
 
 interface ExperienceCardData {
   id: string
@@ -102,7 +103,8 @@ export function ExperienceSection() {
 
   return (
     <>
-      <section id="experience" className="border-t border-border/50 px-4 py-24">
+      <section id="experience" className="relative border-t border-border/50 px-4 py-24">
+        <SectionAtmosphere variant="experience" />
         <div className="mx-auto max-w-4xl">
           <div className="mb-16 text-center">
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
