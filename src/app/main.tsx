@@ -13,7 +13,7 @@ document.documentElement.dataset.layout = 'terminal'
 
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
       <RouterProvider router={router} />
       <Toaster position="top-center" richColors />
     </ThemeProvider>
