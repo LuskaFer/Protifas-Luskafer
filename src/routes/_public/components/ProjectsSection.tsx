@@ -162,6 +162,25 @@ const MOCK_PROJECTS: ProjectCardData[] = [
     ],
   },
   {
+    id: 'proj-isekai-dream-lks',
+    type: 'DEV',
+    order: 8,
+    title: {
+      pt: 'IsekaiDreamLKS - Mod Fabric de Companions',
+      en: 'IsekaiDreamLKS - Fabric Companions Mod'
+    },
+    dateMade: '2026',
+    description: {
+      pt: 'Mod de Minecraft escrito em Java sobre o loader Fabric (1.26.2), centrado em companions invocáveis com progressão por fragmentos, cristais e gemas. Inclui um Invocador multibloco 10×10 com doze gemas lapidadas em pedestais 3D, uma fundação de gacha data-driven com tier, raridade e pity persistente, e companions que auxiliam em combate, retornam para casa e passam por um ciclo de morte e ressurreição — tudo persistido sem forçar o carregamento de chunks. Integra opcionalmente com o Runeskraft e o Enhanced Female Gender Mod. Baseline jogável em alpha 0.0.7, ainda sem release pública.',
+      en: 'Minecraft mod written in Java on the Fabric loader (1.26.2), centered on summonable companions with progression through fragments, crystals and gems. It features a 10×10 multiblock Summoner with twelve cut gems on 3D pedestals, a data-driven gacha foundation with tier, rarity and persistent pity, and companions that assist in combat, return home and go through a death and resurrection cycle — all persisted without forcing chunk loading. Optionally integrates with Runeskraft and the Enhanced Female Gender Mod. Playable baseline at alpha 0.0.7, not yet a public release.'
+    },
+    gallery: [],
+    techIcons: [
+      'devicon-java-plain colored',
+      'devicon-gradle-plain colored'
+    ],
+  },
+  {
     id: 'proj-7',
     type: 'GENERAL',
     order: 4,
