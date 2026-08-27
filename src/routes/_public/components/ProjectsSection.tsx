@@ -140,6 +140,28 @@ const MOCK_PROJECTS: ProjectCardData[] = [
     collab: true,
   },
   {
+    id: 'proj-aut-send-email-jobs',
+    type: 'DEV',
+    order: 7,
+    title: {
+      pt: 'Assistente de Candidaturas com IA (Aut-SendEmail-Jobs)',
+      en: 'AI Job Application Assistant (Aut-SendEmail-Jobs)'
+    },
+    dateMade: '2026',
+    link: 'https://github.com/LuskaFer/Aut-SendEmail-Jobs',
+    description: {
+      pt: 'Sistema que recebe a mensagem crua de um grupo de vagas do WhatsApp, extrai a vaga do texto desestruturado, mede o encaixe com o meu perfil profissional e escreve o e-mail de candidatura, anexando automaticamente a versão do currículo correspondente à área da vaga. O back-end é Java 25 com Spring Boot 4 sob Clean Architecture e DDD: o motor de IA e o envio de e-mail são portas do domínio, com adaptadores intercambiáveis para a Claude API (usando structured outputs) e para Ollama local, além de SMTP para o disparo. O histórico fica em H2 e o front-end é React 19 com Vite e TypeScript.',
+      en: 'System that ingests the raw message from a WhatsApp job-posting group, extracts the vacancy from unstructured text, scores the fit against my professional profile, and drafts the application email, automatically attaching the résumé version matching the role area. The backend is Java 25 with Spring Boot 4 under Clean Architecture and DDD: the AI engine and the email sender are domain ports, with interchangeable adapters for the Claude API (using structured outputs) and local Ollama, plus SMTP for delivery. History is stored in H2 and the frontend is React 19 with Vite and TypeScript.'
+    },
+    gallery: [],
+    techIcons: [
+      'devicon-java-plain colored',
+      'devicon-spring-original colored',
+      'devicon-react-original colored',
+      'devicon-typescript-plain colored'
+    ],
+  },
+  {
     id: 'proj-7',
     type: 'GENERAL',
     order: 4,
