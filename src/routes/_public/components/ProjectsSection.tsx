@@ -23,7 +23,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-1',
     type: 'DEV',
-    order: 1,
+    order: 9,
     title: { pt: 'Microserviço de Gestão de Clientes', en: 'Client Management Microservice' },
     dateMade: '2024',
     link: 'https://github.com/LuskaFer/mscliente---POS-TECH-FIAP',
@@ -38,7 +38,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-2',
     type: 'DEV',
-    order: 2,
+    order: 6,
     title: { pt: 'ERP de Gestão de Projetos (Oracle)', en: 'Project Management ERP (Oracle)' },
     dateMade: '2025',
     link: 'https://github.com/LuskaFer/ORACLE----Gest-Proj',
@@ -52,7 +52,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-3',
     type: 'DEV',
-    order: 3,
+    order: 5,
     title: { 
       pt: 'Incubadora de Agentes IA (RAG & Learning Loop)', 
       en: 'AI Agents Incubator (RAG & Learning Loop)' 
@@ -72,7 +72,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-reserva-salas-postech',
     type: 'DEV',
-    order: 4,
+    order: 10,
     title: { 
       pt: 'API de Gestão e Reserva de Salas', 
       en: 'Room Management & Reservation API' 
@@ -95,7 +95,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-5',
     type: 'DEV',
-    order: 5,
+    order: 7,
     title: { 
       pt: 'API Gateway - Ecossistema Microsserviços', 
       en: 'API Gateway - Microservices Ecosystem' 
@@ -118,7 +118,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-6',
     type: 'DEV',
-    order: 6,
+    order: 8,
     title: { 
       pt: 'Microserviço Error Tracker (Event-Driven)', 
       en: 'Error Tracker Microservice (Event-Driven)' 
@@ -142,7 +142,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-aut-send-email-jobs',
     type: 'DEV',
-    order: 7,
+    order: 2,
     title: {
       pt: 'Assistente de Candidaturas com IA (Aut-SendEmail-Jobs)',
       en: 'AI Job Application Assistant (Aut-SendEmail-Jobs)'
@@ -164,15 +164,15 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-isekai-dream-lks',
     type: 'DEV',
-    order: 8,
+    order: 1,
     title: {
       pt: 'IsekaiDreamLKS - Mod Fabric de Companions',
       en: 'IsekaiDreamLKS - Fabric Companions Mod'
     },
     dateMade: '2026',
     description: {
-      pt: 'Mod de Minecraft escrito em Java sobre o loader Fabric (1.26.2), cujo núcleo é um sistema de gacha — o modelo de monetização e progressão que hoje sustenta os maiores títulos do mercado de games. Toda a fundação é data-driven: tier, raridade, presets, simulador e pity persistente, alimentando a invocação de companions com progressão por fragmentos, cristais e gemas. Em volta do gacha estão um Invocador multibloco 10×10 com doze gemas lapidadas em pedestais 3D e companions que auxiliam em combate, retornam para casa e passam por um ciclo de morte e ressurreição — tudo persistido sem forçar o carregamento de chunks. Integra opcionalmente com o Runeskraft e o Enhanced Female Gender Mod. Baseline jogável em alpha 0.0.7, ainda sem release pública.',
-      en: 'Minecraft mod written in Java on the Fabric loader (1.26.2), whose core is a gacha system — the monetization and progression model that today drives the biggest titles in the games market. The whole foundation is data-driven: tier, rarity, presets, simulator and persistent pity, powering the summoning of companions with progression through fragments, crystals and gems. Around the gacha sit a 10×10 multiblock Summoner with twelve cut gems on 3D pedestals and companions that assist in combat, return home and go through a death and resurrection cycle — all persisted without forcing chunk loading. Optionally integrates with Runeskraft and the Enhanced Female Gender Mod. Playable baseline at alpha 0.0.7, not yet a public release.'
+      pt: 'Mod de Minecraft escrito em Java sobre o loader Fabric (1.26.2), cujo núcleo é um sistema de gacha — o modelo de monetização e progressão que hoje sustenta os maiores títulos do mercado de games. Toda a fundação é data-driven: tier, raridade, presets, simulador e pity persistente, alimentando a invocação de companions com progressão por fragmentos, cristais e gemas. Em volta do gacha estão um Invocador multibloco 10×10 com doze gemas lapidadas em pedestais 3D e companions que auxiliam em combate, retornam para casa e passam por um ciclo de morte e ressurreição — tudo persistido sem forçar o carregamento de chunks. Integra opcionalmente com o Runeskraft e com o motor de renderização 3D listado aqui ao lado. Baseline jogável em alpha 0.0.7, ainda sem release pública.',
+      en: 'Minecraft mod written in Java on the Fabric loader (1.26.2), whose core is a gacha system — the monetization and progression model that today drives the biggest titles in the games market. The whole foundation is data-driven: tier, rarity, presets, simulator and persistent pity, powering the summoning of companions with progression through fragments, crystals and gems. Around the gacha sit a 10×10 multiblock Summoner with twelve cut gems on 3D pedestals and companions that assist in combat, return home and go through a death and resurrection cycle — all persisted without forcing chunk loading. Optionally integrates with Runeskraft and with the 3D rendering engine listed alongside. Playable baseline at alpha 0.0.7, not yet a public release.'
     },
     gallery: [],
     techIcons: [
@@ -181,6 +181,51 @@ const MOCK_PROJECTS: ProjectCardData[] = [
       'devicon-java-plain colored',
       'devicon-gradle-plain colored'
     ],
+  },
+  {
+    id: 'proj-motor-render-3d',
+    type: 'DEV',
+    order: 3,
+    title: {
+      pt: 'Motor de Renderização 3D Customizável (Minecraft)',
+      en: 'Customizable 3D Rendering Engine (Minecraft)'
+    },
+    dateMade: '2026',
+    description: {
+      pt: 'Motor gráfico que injeta geometria própria no pipeline de renderização de entidades do Minecraft, permitindo desenhar malhas 3D arbitrárias com física sobre o modelo do jogador — algo que o jogo não expõe nativamente. Em Java 25 sobre Fabric, usa Mixins para se acoplar ao renderizador de entidades e às camadas de equipamento, com camada própria de superfície, testes de paridade da malha e HUD de depuração para render e física. A geometria vem de um pipeline em Python que importa arquivos GLB e aplica operações geométricas genéricas — corte por reta na grade, esticamento e suavização bi-Laplaciana — exportando 24 formatos selecionáveis em tempo de execução, com fixtures verificadas por hash. Compila nas versões 26.1 e 26.2 via Stonecutter. A meta é generalizar o motor para renderizar qualquer peça customizada com física: armaduras próprias, asas e acessórios.',
+      en: 'Graphics engine that injects custom geometry into Minecraft’s entity rendering pipeline, making it possible to draw arbitrary 3D meshes with physics over the player model — something the game does not expose natively. Written in Java 25 on Fabric, it uses Mixins to hook into the entity renderer and the equipment layers, with its own surface layer, mesh parity tests and a debug HUD for render and physics. Geometry comes from a Python pipeline that imports GLB files and applies generic geometric operations — cutting along a line on the grid, stretching and bi-Laplacian smoothing — exporting 24 runtime-selectable shapes with hash-verified fixtures. It builds against versions 26.1 and 26.2 through Stonecutter. The goal is to generalize the engine to render any custom part with physics: bespoke armor, wings and accessories.'
+    },
+    gallery: [],
+    techIcons: [
+      'icon-minecraft',
+      'icon-fabricmc',
+      'devicon-java-plain colored',
+      'devicon-python-plain colored',
+      'devicon-gradle-plain colored'
+    ],
+  },
+  {
+    id: 'proj-runeskraft',
+    type: 'DEV',
+    order: 4,
+    title: {
+      pt: 'Runeskraft - Armas 3D para Minecraft (colab)',
+      en: 'Runeskraft - 3D Weapons for Minecraft (collab)'
+    },
+    dateMade: '2026',
+    description: {
+      pt: 'Mod Fabric para Minecraft 26.2 que adiciona armas com modelos 3D reais, montados em partes separadas (pomo, cabo, guarda e lâmina) e texturas individuais por peça. Colaboração com Joaquim Mendes: atuei na modelagem 3D dos itens — katar, khopesh, lança, machado de ametista e foice —, na configuração dos display transforms que corrigem escala e posicionamento da arma na mão em primeira e terceira pessoa, na normalização dos limites das malhas e nos atributos de dano das armas. Também montei a automação de modelagem do projeto: o workspace MCP integrado ao Blockbench e as skills portáteis versionadas no próprio repositório, para que qualquer máquina reproduza o ambiente.',
+      en: 'Fabric mod for Minecraft 26.2 that adds weapons with real 3D models, assembled from separate parts (pommel, hilt, guard and blade) with individual textures per piece. A collaboration with Joaquim Mendes: I worked on the 3D modeling of the items — katar, khopesh, spear, amethyst axe and scythe —, on the display transforms that fix the weapon’s scale and placement in hand in first and third person, on normalizing mesh bounds, and on the weapon attribute data. I also built the project’s modeling automation: the MCP workspace integrated with Blockbench and the portable skills versioned in the repository itself, so any machine can reproduce the environment.'
+    },
+    gallery: [],
+    techIcons: [
+      'icon-minecraft',
+      'icon-fabricmc',
+      'devicon-java-plain colored',
+      'devicon-blender-original colored',
+      'devicon-gradle-plain colored'
+    ],
+    collab: true,
   },
   {
     id: 'proj-7',
