@@ -209,13 +209,13 @@ const MOCK_PROJECTS: ProjectCardData[] = [
     type: 'DEV',
     order: 4,
     title: {
-      pt: 'Runeskraft - Armas 3D para Minecraft (colab)',
-      en: 'Runeskraft - 3D Weapons for Minecraft (collab)'
+      pt: 'Runeskraft - Mod de Magia para Minecraft (colab)',
+      en: 'Runeskraft - Magic Mod for Minecraft (collab)'
     },
     dateMade: '2026',
     description: {
-      pt: 'Mod Fabric para Minecraft 26.2 que adiciona armas com modelos 3D reais, montados em partes separadas (pomo, cabo, guarda e lâmina) e texturas individuais por peça. Colaboração com Joaquim Mendes: atuei na modelagem 3D dos itens — katar, khopesh, lança, machado de ametista e foice —, na configuração dos display transforms que corrigem escala e posicionamento da arma na mão em primeira e terceira pessoa, na normalização dos limites das malhas e nos atributos de dano das armas. Também montei a automação de modelagem do projeto: o workspace MCP integrado ao Blockbench e as skills portáteis versionadas no próprio repositório, para que qualquer máquina reproduza o ambiente.',
-      en: 'Fabric mod for Minecraft 26.2 that adds weapons with real 3D models, assembled from separate parts (pommel, hilt, guard and blade) with individual textures per piece. A collaboration with Joaquim Mendes: I worked on the 3D modeling of the items — katar, khopesh, spear, amethyst axe and scythe —, on the display transforms that fix the weapon’s scale and placement in hand in first and third person, on normalizing mesh bounds, and on the weapon attribute data. I also built the project’s modeling automation: the MCP workspace integrated with Blockbench and the portable skills versioned in the repository itself, so any machine can reproduce the environment.'
+      pt: "Mod Fabric para Minecraft 26.2 que adiciona armas com modelos 3D reais, montados em partes separadas (pomo, cabo, guarda e lâmina) e texturas individuais por peça. Inspirado no sucesso mundial de Frieren — Jornada para Além, a série que explora a magia e as profundezas de aventuras épicas. Colaboração com Joaquim Mendes: atuei na modelagem 3D dos itens — katar, khopesh, lança, machado de ametista e foice —, na configuração dos display transforms que corrigem escala e posicionamento da arma na mão em primeira e terceira pessoa, na normalização dos limites das malhas e nos atributos de dano das armas. Também montei a automação de modelagem do projeto: o workspace MCP integrado ao Blockbench e as skills portáteis versionadas no próprio repositório, para que qualquer máquina reproduza o ambiente.",
+      en: "Fabric mod for Minecraft 26.2 that adds weapons with real 3D models, assembled from separate parts (pommel, hilt, guard and blade) with individual textures per piece. Inspired by the global phenomenon Frieren — Beyond Journey, a series that explores magic and the depths of epic adventures. A collaboration with Joaquim Mendes: I worked on the 3D modeling of the items — katar, khopesh, spear, amethyst axe and scythe —, on the display transforms that fix weapon scale and placement in hand in first and third person, on normalizing mesh bounds, and on weapon attribute data. I also built the project modeling automation: the MCP workspace integrated with Blockbench and the portable skills versioned in the repository itself, so any machine can reproduce the environment."
     },
     gallery: [],
     techIcons: [
