@@ -21,17 +21,33 @@ interface ProjectCardData {
 
 const MOCK_PROJECTS: ProjectCardData[] = [
   {
+    id: 'proj-portalccs-v2',
+    type: 'DEV',
+    order: -3,
+    title: {
+      pt: 'PortalCCS v2 — Cartório Municipal de São José dos Campos',
+      en: 'PortalCCS v2 — São José dos Campos Municipal Notary',
+    },
+    dateMade: 'Em desenvolvimento',
+    description: {
+      pt: 'Co-lidero a modernização tecnológica do Cartório Municipal e atuo no núcleo que define as inovações da nova solução. O PortalCCS v2 está sendo arquitetado do zero: Java 25 com Clean Architecture + DDD no back-end e React + Vite com arquitetura por features no front-end. O ecossistema inclui automações avançadas e um chatbot com IA integrada, e otimiza diretamente milhares de processos da cidade.',
+      en: 'I co-lead the technological modernization of the Municipal Notary and am part of the core team that defines the innovations of the new solution. PortalCCS v2 is being architected from scratch: Java 25 with Clean Architecture + DDD on the back end and React + Vite with a feature-based architecture on the front end. The ecosystem includes advanced automations and an AI-integrated chatbot, and directly optimizes thousands of city processes.',
+    },
+    gallery: [],
+    techIcons: ['devicon-java-plain colored', 'devicon-spring-original colored', 'devicon-react-original colored', 'devicon-vitejs-plain colored'],
+  },
+  {
     id: 'proj-cartorio-legado',
     type: 'DEV',
     order: -2,
     title: {
-      pt: 'Sistema Legado do Cartório Municipal — Prefeitura de São José dos Campos',
-      en: 'Municipal Notary Legacy System — São José dos Campos City Hall',
+      pt: 'PortalCCS v1 — Cartório Municipal de São José dos Campos',
+      en: 'PortalCCS v1 — São José dos Campos Municipal Notary',
     },
     dateMade: 'Em produção',
     description: {
-      pt: 'Sistema legado em PHP / Laravel, em produção. Reconstruí todo o sistema de processos administrativos e suas funções, incluindo a hierarquia de processos. Refatorei por completo o sistema de transferência de processos, com guardas, rotas, models e fluxos reforçados. Criei o sistema de favoritos/preferências: uma estrela clicável na lista de usuários, usada para o compartilhamento e sub-compartilhamento de processos. Também mantive em funcionamento diário muitas funções legadas, que meu supervisor confiou a mim. Essa estabilização veio antes do novo Portal CCS da equipe (Java 25 + React).',
-      en: 'Legacy system in PHP / Laravel, in production. I rebuilt the whole administrative-process system and its functions, including the process hierarchy. I fully refactored the process-transfer system, with hardened guards, routes, models and flows. I built the favourites/preferences system: a clickable star in the user list, used for sharing and sub-sharing processes. I also kept many legacy functions running day to day, which my supervisor entrusted to me. This stabilization came before our new CCS Portal (Java 25 + React).',
+      pt: 'Primeira versão do PortalCCS, em PHP / Laravel e em produção. Reconstruí todo o sistema de processos administrativos e suas funções, incluindo a hierarquia de processos. Refatorei por completo o sistema de transferência de processos, com guardas, rotas, models e fluxos reforçados. Criei o sistema de favoritos/preferências: uma estrela clicável na lista de usuários, usada para o compartilhamento e sub-compartilhamento de processos. Também mantive em funcionamento diário muitas funções legadas, que meu supervisor confiou a mim. Essa estabilização veio antes do novo Portal CCS da equipe (Java 25 + React).',
+      en: 'The first version of PortalCCS, in PHP / Laravel and in production. I rebuilt the whole administrative-process system and its functions, including the process hierarchy. I fully refactored the process-transfer system, with hardened guards, routes, models and flows. I built the favourites/preferences system: a clickable star in the user list, used for sharing and sub-sharing processes. I also kept many legacy functions running day to day, which my supervisor entrusted to me. This stabilization came before our new CCS Portal (Java 25 + React).',
     },
     gallery: [],
     techIcons: ['devicon-php-plain colored', 'devicon-laravel-original colored', 'devicon-javascript-plain colored'],
