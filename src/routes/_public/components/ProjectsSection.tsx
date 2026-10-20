@@ -34,7 +34,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
       en: 'I co-lead the technological modernization of the Municipal Notary and am part of the core team that defines the innovations of the new solution. PortalCCS v2 is being architected from scratch: Java 25 with Clean Architecture + DDD on the back end and React + Vite with a feature-based architecture on the front end. The ecosystem includes advanced automations and an AI-integrated chatbot, and directly optimizes thousands of city processes.',
     },
     gallery: [],
-    techIcons: ['devicon-java-plain colored', 'devicon-spring-original colored', 'devicon-react-original colored', 'devicon-vitejs-plain colored'],
+    techIcons: ['devicon-java-plain colored', 'devicon-spring-original colored', 'devicon-mariadb-original colored', 'devicon-react-original colored', 'devicon-vitejs-plain colored', 'devicon-typescript-plain colored'],
   },
   {
     id: 'proj-cartorio-legado',
@@ -50,7 +50,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
       en: 'The first version of PortalCCS, in PHP / Laravel and in production. I rebuilt the whole administrative-process system and its functions, including the process hierarchy. I fully refactored the process-transfer system, with hardened guards, routes, models and flows. I built the favourites/preferences system: a clickable star in the user list, used for sharing and sub-sharing processes. I also kept many legacy functions running day to day, which my supervisor entrusted to me. This stabilization came before our new CCS Portal (Java 25 + React).',
     },
     gallery: [],
-    techIcons: ['devicon-php-plain colored', 'devicon-laravel-original colored', 'devicon-javascript-plain colored'],
+    techIcons: ['devicon-php-plain colored', 'devicon-laravel-original colored', 'devicon-mariadb-original colored', 'devicon-react-original colored', 'devicon-vitejs-plain colored', 'devicon-typescript-plain colored', 'devicon-javascript-plain colored'],
   },
   {
     id: 'proj-1234voce',
