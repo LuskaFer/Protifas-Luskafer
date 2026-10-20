@@ -21,6 +21,38 @@ interface ProjectCardData {
 
 const MOCK_PROJECTS: ProjectCardData[] = [
   {
+    id: 'proj-cartorio-legado',
+    type: 'DEV',
+    order: -2,
+    title: {
+      pt: 'Sistema Legado do Cartório Municipal — Prefeitura de São José dos Campos',
+      en: 'Municipal Notary Legacy System — São José dos Campos City Hall',
+    },
+    dateMade: 'Em produção',
+    description: {
+      pt: 'Sistema legado em PHP / Laravel, em produção. Reconstruí todo o sistema de processos administrativos e suas funções, incluindo a hierarquia de processos. Refatorei por completo o sistema de transferência de processos, com guardas, rotas, models e fluxos reforçados. Criei o sistema de favoritos/preferências: uma estrela clicável na lista de usuários, usada para o compartilhamento e sub-compartilhamento de processos. Também mantive em funcionamento diário muitas funções legadas, que meu supervisor confiou a mim. Essa estabilização veio antes do novo Portal CCS da equipe (Java 25 + React).',
+      en: 'Legacy system in PHP / Laravel, in production. I rebuilt the whole administrative-process system and its functions, including the process hierarchy. I fully refactored the process-transfer system, with hardened guards, routes, models and flows. I built the favourites/preferences system: a clickable star in the user list, used for sharing and sub-sharing processes. I also kept many legacy functions running day to day, which my supervisor entrusted to me. This stabilization came before our new CCS Portal (Java 25 + React).',
+    },
+    gallery: [],
+    techIcons: ['devicon-php-plain colored', 'devicon-laravel-original colored', 'devicon-javascript-plain colored'],
+  },
+  {
+    id: 'proj-1234voce',
+    type: 'DEV',
+    order: -1,
+    title: {
+      pt: 'Plataforma de Gestão 1234voce.com — Instituto Você',
+      en: '1234voce.com Management Platform — Instituto Você',
+    },
+    dateMade: 'Em produção',
+    description: {
+      pt: 'Plataforma em PHP / CodeIgniter, em produção e usada até hoje. Assumi um sistema que estava 50% pronto, finalizei e corrigi, e coloquei a versão atual em produção por conta própria. Integrei totalmente o gateway de pagamento e-Rede (Rede): antes, a rede de mais de 40 franquias da época só recebia matrículas presencialmente, com maquininha física; depois da integração, o pagamento passou a ser online, com parcelamento e juros configuráveis por franquia. Também mantive servidores CentOS na Azure.',
+      en: 'Platform in PHP / CodeIgniter, in production and still used today. I took over a system that was 50% done, finished and fixed it, and put the current version in production myself. I fully integrated the e-Rede (Rede) payment gateway: before that, the network of 40+ franchises at the time could only take enrollment payments in person with a physical card machine; after the integration, payment became online, with installments and interest configurable per franchise. I also maintained CentOS servers on Azure.',
+    },
+    gallery: [],
+    techIcons: ['devicon-php-plain colored', 'devicon-codeigniter-plain colored', 'devicon-centos-plain colored', 'devicon-azure-plain colored'],
+  },
+  {
     id: 'proj-1',
     type: 'DEV',
     order: 9,

@@ -51,8 +51,8 @@ const MOCK_EXPERIENCES: ExperienceCardData[] = [
     company: 'Instituto Você',
     period: { pt: 'Janeiro 2022 - Agosto 2022', en: 'January 2022 - August 2022' },
     description: {
-      pt: 'Desenvolvimento End-to-End de um sistema de gestão empresarial (ERP) em PHP. Além do código, assumi as responsabilidades de DevOps, arquitetando, configurando e mantendo a infraestrutura de servidores CentOS rodando na nuvem do Microsoft Azure.',
-      en: 'End-to-end development of an Enterprise Resource Planning (ERP) system in PHP. Beyond coding, I took on DevOps responsibilities, architecting, configuring, and maintaining CentOS servers running on the Microsoft Azure cloud.',
+      pt: 'Assumi a plataforma de gestão 1234voce.com (PHP / CodeIgniter), que estava 50% pronta, finalizei e corrigi o sistema e coloquei a versão atual em produção; ela segue em uso até hoje. Integrei por completo o gateway de pagamento e-Rede (Rede), permitindo pagamento online, com parcelamento e juros configuráveis por franquia, para a rede de mais de 40 franquias que antes só recebia matrículas presencialmente. Também mantive servidores CentOS na nuvem Azure.',
+      en: 'I took over the 1234voce.com management platform (PHP / CodeIgniter), which was 50% done, finished and fixed it, and put the current version in production; it is still used today. I fully integrated the e-Rede (Rede) payment gateway, enabling online payment with installments and interest configurable per franchise, for the network of 40+ franchises that could previously only take enrollments in person. I also maintained CentOS servers on Azure.',
     },
     link: 'https://1234voce.com.br/',
     thumbnail: '',
