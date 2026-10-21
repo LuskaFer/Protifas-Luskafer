@@ -43,7 +43,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-portalccs-v2',
     type: 'DEV',
-    order: -4,
+    order: -3,
     title: {
       pt: 'PortalCCS v2 — Cartório Municipal de São José dos Campos',
       en: 'PortalCCS v2 — São José dos Campos Municipal Notary',
@@ -59,7 +59,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: OMNI_ID,
     type: 'DEV',
-    order: -3,
+    order: -4,
     visual: 'omni',
     title: {
       pt: 'Omni — Plataforma Pessoal de Operações com IA',
