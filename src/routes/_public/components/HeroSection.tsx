@@ -1,4 +1,4 @@
-import { ArrowUpRight, Code2, Globe } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Code2, Globe } from 'lucide-react'
 import { useLanguage } from '@/shared/contexts/LanguageContext'
 import { HeroHighlight, Highlight } from '@/shared/ui/hero-highlight'
 import { TerminalHeroBackdrop } from './TerminalHeroBackdrop'
@@ -49,6 +49,13 @@ export function HeroSection() {
             LinkedIn
           </a>
         </div>
+
+        <a href="#omni" className="omni-teaser mt-8" aria-label={t('hero.nowBuildingLabel')}>
+          <span className="omni-teaser__dot" aria-hidden="true" />
+          <span className="omni-teaser__label">{t('hero.nowBuilding')}</span>
+          <span className="omni-teaser__name">Omni</span>
+          <ArrowRight className="omni-teaser__arrow size-3.5" aria-hidden="true" />
+        </a>
       </div>
     </HeroHighlight>
   )

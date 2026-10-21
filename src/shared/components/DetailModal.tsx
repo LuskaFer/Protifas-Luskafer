@@ -1,5 +1,11 @@
+import { type CSSProperties, type ReactNode, useEffect, useId } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ExternalLink, X } from 'lucide-react'
+
+export interface DetailHighlight {
+  title: string
+  description: string
+}
 
 interface DetailModalProps {
   isOpen: boolean
@@ -12,6 +18,14 @@ interface DetailModalProps {
   link?: string
   techIcons?: string[]
   thumbnail?: string | null
+  /** Capa própria; quando presente, substitui os ícones e a thumbnail. */
+  header?: ReactNode
+  /** Destaques em grade, exibidos depois da descrição. */
+  highlights?: DetailHighlight[]
+  /** Parágrafo de fechamento, exibido depois dos destaques. */
+  closing?: string
+  /** Cor de acento (CSS) dos destaques; o padrão é a cor primária. */
+  accent?: string
 }
 
 export function DetailModal({
@@ -25,7 +39,22 @@ export function DetailModal({
   link,
   techIcons,
   thumbnail,
+  header,
+  highlights,
+  closing,
+  accent,
 }: DetailModalProps) {
+  const titleId = useId()
+
+  useEffect(() => {
+    if (!isOpen) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [isOpen, onClose])
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -42,6 +71,10 @@ export function DetailModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.2 }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
+            style={accent ? ({ '--detail-accent': accent } as CSSProperties) : undefined}
             className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-card text-card-foreground border border-border rounded-2xl shadow-2xl flex flex-col"
             onClick={e => e.stopPropagation()}
           >
@@ -54,7 +87,9 @@ export function DetailModal({
               <X className="size-5" />
             </button>
 
-            {techIcons && techIcons.length > 0 ? (
+            {header ? (
+              <div className="w-full h-64 shrink-0 overflow-hidden rounded-t-2xl border-b border-border">{header}</div>
+            ) : techIcons && techIcons.length > 0 ? (
               <div className="w-full h-64 bg-gradient-to-br from-slate-900 to-slate-950 border-b border-slate-800 flex flex-wrap content-center items-center justify-center gap-6 p-6 relative overflow-hidden shrink-0">
                 <div className="absolute inset-0 bg-slate-500/10 blur-3xl rounded-full" />
                 {techIcons.map((iconClass, index) => (
@@ -74,7 +109,7 @@ export function DetailModal({
             ) : null}
 
             <div className="p-6 sm:p-8">
-              <h2 className="text-3xl font-bold text-foreground mb-2">{title}</h2>
+              <h2 id={titleId} className="text-3xl font-bold text-foreground mb-2">{title}</h2>
               {period ? (
                 <p className="text-sm font-medium text-primary mb-6">{period}</p>
               ) : subtitle ? (
@@ -84,6 +119,21 @@ export function DetailModal({
               <p className="text-base leading-relaxed text-muted-foreground whitespace-pre-wrap">
                 {description}
               </p>
+
+              {highlights && highlights.length > 0 && (
+                <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+                  {highlights.map(item => (
+                    <li key={item.title} className="detail-highlight rounded-lg border border-border bg-muted/40 p-4">
+                      <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {closing && (
+                <p className="mt-8 text-base leading-relaxed text-muted-foreground whitespace-pre-wrap">{closing}</p>
+              )}
 
               {link && (
                 <a

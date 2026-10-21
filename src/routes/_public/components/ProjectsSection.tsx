@@ -1,17 +1,27 @@
-import { useState } from 'react'
-import { Code2, ExternalLink, Lock, Users } from 'lucide-react'
+import { type KeyboardEvent, useEffect, useRef, useState } from 'react'
+import { ChevronLeft, ChevronRight, Code2, ExternalLink, Lock, Users } from 'lucide-react'
 import { useLanguage } from '@/shared/contexts/LanguageContext'
 import { DetailModal } from '@/shared/components/DetailModal'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shared/ui/carousel'
+import type { Lang } from '@/shared/locales/dictionaries'
+import { OmniSignal } from './OmniSignal'
 import { SectionAtmosphere } from './SectionAtmosphere'
+
+type Localized = { pt: string; en: string }
 
 interface ProjectCardData {
   id: string
   type: 'DEV' | 'GENERAL'
   order: number
-  title: { pt: string; en: string }
-  dateMade: string
-  description: { pt: string; en: string }
+  title: Localized
+  dateMade: string | Localized
+  description: Localized
+  /** Texto curto do card; sem ele, o card usa o início da descrição. */
+  teaser?: Localized
+  highlights?: { title: Localized; description: Localized }[]
+  closing?: Localized
+  /** Capa própria em vez dos ícones de tecnologia. */
+  visual?: 'omni'
   link?: string
   thumbnail?: string | null
   gallery: string[]
@@ -19,22 +29,86 @@ interface ProjectCardData {
   collab?: boolean
 }
 
+/** Seis cards dividem por 1, 2 e 3 colunas: toda página cheia fecha linhas completas. */
+const PAGE_SIZE = 6
+const OMNI_ID = 'proj-omni'
+const OMNI_HASH = '#omni'
+
+const IN_DEVELOPMENT: Localized = { pt: 'Em desenvolvimento', en: 'In development' }
+const IN_PRODUCTION: Localized = { pt: 'Em produção', en: 'In production' }
+
+const localize = (value: string | Localized, lang: Lang) => (typeof value === 'string' ? value : value[lang])
+
 const MOCK_PROJECTS: ProjectCardData[] = [
   {
     id: 'proj-portalccs-v2',
     type: 'DEV',
-    order: -3,
+    order: -4,
     title: {
       pt: 'PortalCCS v2 — Cartório Municipal de São José dos Campos',
       en: 'PortalCCS v2 — São José dos Campos Municipal Notary',
     },
-    dateMade: 'Em desenvolvimento',
+    dateMade: IN_DEVELOPMENT,
     description: {
       pt: 'Co-lidero a modernização tecnológica do Cartório Municipal e atuo no núcleo que define as inovações da nova solução. O PortalCCS v2 está sendo arquitetado do zero: Java 25 com Clean Architecture + DDD no back-end e React + Vite com arquitetura por features no front-end. O ecossistema inclui automações avançadas e um chatbot com IA integrada, e otimiza diretamente milhares de processos da cidade.',
       en: 'I co-lead the technological modernization of the Municipal Notary and am part of the core team that defines the innovations of the new solution. PortalCCS v2 is being architected from scratch: Java 25 with Clean Architecture + DDD on the back end and React + Vite with a feature-based architecture on the front end. The ecosystem includes advanced automations and an AI-integrated chatbot, and directly optimizes thousands of city processes.',
     },
     gallery: [],
     techIcons: ['devicon-java-plain colored', 'devicon-spring-original colored', 'devicon-mariadb-original colored', 'devicon-react-original colored', 'devicon-vitejs-plain colored', 'devicon-typescript-plain colored'],
+  },
+  {
+    id: OMNI_ID,
+    type: 'DEV',
+    order: -3,
+    visual: 'omni',
+    title: {
+      pt: 'Omni — Plataforma Pessoal de Operações com IA',
+      en: 'Omni — Personal AI Operations Platform',
+    },
+    dateMade: { pt: 'Projeto pessoal · em evolução contínua', en: 'Personal project · continuously evolving' },
+    teaser: {
+      pt: 'O projeto da minha vida. Uma plataforma pessoal que coloca uma frota de IAs para planejar, escrever, testar e entregar software nos meus projetos — dia e noite — enquanto a palavra final continua sendo minha.',
+      en: 'The project of my life. A personal platform that puts a fleet of AI workers to plan, write, test and ship software across my projects — day and night — while the final word stays mine.',
+    },
+    description: {
+      pt: 'E se o seu roadmap andasse sozinho enquanto você trabalha?\n\nO Omni é a plataforma pessoal de operações que eu construo — o projeto da minha vida. Ele roda nas minhas próprias máquinas, local-first, e coordena uma frota de agentes de IA que planejam, escrevem, testam e entregam software a qualquer hora do dia. Enquanto eu cumpro o meu expediente, ele transforma o meu roadmap em versões entregues e testadas, prontas para a minha revisão.',
+      en: 'What if your roadmap kept moving while you were at work?\n\nOmni is the personal operations platform I build — the project of my life. It runs on my own machines, local-first, and coordinates a fleet of AI workers that plan, write, test and ship software at any hour. While I am at my day job, it turns my roadmap into delivered, tested releases, ready for my review.',
+    },
+    highlights: [
+      {
+        title: { pt: 'Trabalha enquanto eu trabalho', en: 'Works while I work' },
+        description: {
+          pt: 'Planejamento, código e testes seguem em frente o dia todo. Eu chego e encontro entregas prontas para revisar, não tarefas esperando para começar.',
+          en: 'Planning, code and tests keep moving all day. I come back to deliveries ready for review, not tasks waiting to start.',
+        },
+      },
+      {
+        title: { pt: 'Me responde de qualquer lugar', en: 'Answers me from anywhere' },
+        description: {
+          pt: 'Pelo Telegram, do celular, converso com ele, acompanho o andamento e decido o próximo passo — esteja eu onde estiver.',
+          en: 'On Telegram, from my phone, I talk to it, follow the progress and decide the next step — wherever I am.',
+        },
+      },
+      {
+        title: { pt: 'Vários projetos, um só comando', en: 'Many projects, one command center' },
+        description: {
+          pt: 'Jogos, mods de Minecraft e a minha automação de candidaturas avançam lado a lado, cada um no seu próprio espaço.',
+          en: 'Games, Minecraft mods and my job-application automation move forward side by side, each in its own space.',
+        },
+      },
+      {
+        title: { pt: 'A palavra final é minha', en: 'The final word is mine' },
+        description: {
+          pt: 'Portões de aprovação humana, auditoria completa de cada passo, mudanças reversíveis e custo sempre à vista. Autonomia, sim; cheque em branco, nunca.',
+          en: 'Human approval gates, a full audit of every step, reversible changes and cost always in sight. Autonomy, yes; a blank check, never.',
+        },
+      },
+    ],
+    closing: {
+      pt: 'O que vem por aí: um beta privado está sendo preparado para o primeiro testador. A ambição é simples de dizer e difícil de construir — dar a uma única pessoa o alcance de um time inteiro, sem abrir mão do controle.',
+      en: 'What comes next: a private beta is being prepared for its first tester. The ambition is simple to say and hard to build — give one person the reach of a whole team, without giving up control.',
+    },
+    gallery: [],
   },
   {
     id: 'proj-cartorio-legado',
@@ -44,7 +118,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
       pt: 'PortalCCS v1 — Cartório Municipal de São José dos Campos',
       en: 'PortalCCS v1 — São José dos Campos Municipal Notary',
     },
-    dateMade: 'Em produção',
+    dateMade: IN_PRODUCTION,
     description: {
       pt: 'Primeira versão do PortalCCS, em PHP / Laravel e em produção. Reconstruí todo o sistema de processos administrativos e suas funções, incluindo a hierarquia de processos. Refatorei por completo o sistema de transferência de processos, com guardas, rotas, models e fluxos reforçados. Criei o sistema de favoritos/preferências: uma estrela clicável na lista de usuários, usada para o compartilhamento e sub-compartilhamento de processos. Também mantive em funcionamento diário muitas funções legadas, que meu supervisor confiou a mim. Essa estabilização veio antes do novo Portal CCS da equipe (Java 25 + React).',
       en: 'The first version of PortalCCS, in PHP / Laravel and in production. I rebuilt the whole administrative-process system and its functions, including the process hierarchy. I fully refactored the process-transfer system, with hardened guards, routes, models and flows. I built the favourites/preferences system: a clickable star in the user list, used for sharing and sub-sharing processes. I also kept many legacy functions running day to day, which my supervisor entrusted to me. This stabilization came before our new CCS Portal (Java 25 + React).',
@@ -60,7 +134,7 @@ const MOCK_PROJECTS: ProjectCardData[] = [
       pt: 'Plataforma de Gestão 1234voce.com — Instituto Você',
       en: '1234voce.com Management Platform — Instituto Você',
     },
-    dateMade: 'Em produção',
+    dateMade: IN_PRODUCTION,
     description: {
       pt: 'O Instituto Você é uma empresa de treinamentos em desenvolvimento humano (PNL), com matriz em São José dos Campos, mais de 300 mil alunos formados e unidades nas cinco regiões do Brasil. Sua plataforma de gestão é em PHP / CodeIgniter, está em produção e é usada até hoje. Assumi um sistema que estava 50% pronto, finalizei e corrigi, e coloquei a versão atual em produção por conta própria. Integrei totalmente o gateway de pagamento e-Rede (Rede): antes, a rede de mais de 40 franquias da época só recebia matrículas presencialmente, com maquininha física; depois da integração, o pagamento passou a ser online, com parcelamento e juros configuráveis por franquia. Também mantive servidores CentOS na Azure.',
       en: 'Instituto Você is a human-development training company (NLP), headquartered in São José dos Campos, with over 300,000 students trained and units across all five regions of Brazil. Its management platform is built in PHP / CodeIgniter, in production and still used today. I took over a system that was 50% done, finished and fixed it, and put the current version in production myself. I fully integrated the e-Rede (Rede) payment gateway: before that, the network of 40+ franchises at the time could only take enrollment payments in person with a physical card machine; after the integration, payment became online, with installments and interest configurable per franchise. I also maintained CentOS servers on Azure.',
@@ -334,23 +408,72 @@ const MOCK_PROJECTS: ProjectCardData[] = [
   },
 ]
 
+const sortedProjects = (filter: 'DEV' | 'GENERAL') =>
+  MOCK_PROJECTS.filter(p => p.type === filter).sort((a, b) => a.order - b.order)
+
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 export function ProjectsSection() {
   const { t, lang } = useLanguage()
   const [projectFilter, setProjectFilter] = useState<'DEV' | 'GENERAL'>('DEV')
-  const [modalContent, setModalContent] = useState<{
-    type: 'project'
-    title: string
-    description: string
-    subtitle: string
-    tags: string[]
-    gallery?: string[]
-    link?: string
-    techIcons?: string[]
-    thumbnail?: string | null
-  } | null>(null)
+  const [page, setPage] = useState(0)
+  const [openProjectId, setOpenProjectId] = useState<string | null>(null)
+  const gridTopRef = useRef<HTMLDivElement>(null)
 
-  const filteredProjects = MOCK_PROJECTS.filter(p => p.type === projectFilter).sort((a, b) => a.order - b.order)
-  const allProjects = filteredProjects
+  const filteredProjects = sortedProjects(projectFilter)
+  const totalPages = Math.max(1, Math.ceil(filteredProjects.length / PAGE_SIZE))
+  const currentPage = Math.min(page, totalPages - 1)
+  const pageProjects = filteredProjects.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE)
+  // Quatro cards em três colunas deixariam um órfão; em duas colunas fecham um 2x2.
+  const balancedTwoByTwo = pageProjects.length === 4
+  const openProject = MOCK_PROJECTS.find(p => p.id === openProjectId) ?? null
+
+  // Link compartilhável (e o teaser do hero): /#omni abre o card do Omni.
+  useEffect(() => {
+    const openOmniFromHash = () => {
+      if (window.location.hash !== OMNI_HASH) return
+      const omniIndex = sortedProjects('DEV').findIndex(p => p.id === OMNI_ID)
+      setProjectFilter('DEV')
+      setPage(Math.floor(omniIndex / PAGE_SIZE))
+      setOpenProjectId(OMNI_ID)
+    }
+    openOmniFromHash()
+    window.addEventListener('hashchange', openOmniFromHash)
+    return () => window.removeEventListener('hashchange', openOmniFromHash)
+  }, [])
+
+  const closeModal = () => {
+    setOpenProjectId(null)
+    if (window.location.hash === OMNI_HASH) {
+      window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search)
+    }
+  }
+
+  const changeFilter = (filter: 'DEV' | 'GENERAL') => {
+    setProjectFilter(filter)
+    setPage(0)
+  }
+
+  const changePage = (next: number) => {
+    setPage(next)
+    const top = gridTopRef.current
+    if (top && top.getBoundingClientRect().top < 0) {
+      top.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' })
+    }
+  }
+
+  const onCardKeyDown = (event: KeyboardEvent<HTMLDivElement>, id: string) => {
+    if (event.target !== event.currentTarget) return
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      setOpenProjectId(id)
+    }
+  }
+
+  const cardWidth = balancedTwoByTwo
+    ? 'lg:w-[calc((100%_-_1.5rem)/2)]'
+    : 'lg:w-[calc((100%_-_3rem)/3)]'
 
   return (
     <>
@@ -364,56 +487,53 @@ export function ProjectsSection() {
             <p className="mt-3 text-muted-foreground">{t('projects.subtitle')}</p>
           </div>
 
-          <div className="mb-10 flex justify-center">
+          <div ref={gridTopRef} className="mb-10 flex scroll-mt-20 justify-center">
             <div className="inline-flex rounded-lg border border-border bg-card p-1">
-              <button
-                type="button"
-                onClick={() => setProjectFilter('DEV')}
-                className={`rounded-md px-5 py-2 text-sm font-medium transition-all ${
-                  projectFilter === 'DEV'
-                    ? 'bg-primary text-primary-foreground shadow-sm'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                {t('projects.filterDev')}
-              </button>
-              <button
-                type="button"
-                onClick={() => setProjectFilter('GENERAL')}
-                className={`rounded-md px-5 py-2 text-sm font-medium transition-all ${
-                  projectFilter === 'GENERAL'
-                    ? 'bg-primary text-primary-foreground shadow-sm'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                {t('projects.filterGeneral')}
-              </button>
+              {(['DEV', 'GENERAL'] as const).map(filter => (
+                <button
+                  key={filter}
+                  type="button"
+                  aria-pressed={projectFilter === filter}
+                  onClick={() => changeFilter(filter)}
+                  className={`rounded-md px-5 py-2 text-sm font-medium transition-all ${
+                    projectFilter === filter
+                      ? 'bg-primary text-primary-foreground shadow-sm'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {filter === 'DEV' ? t('projects.filterDev') : t('projects.filterGeneral')}
+                </button>
+              ))}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {allProjects.map(project => (
-              <div
-                key={project.id}
-                onClick={() =>
-                  setModalContent({
-                    type: 'project',
-                    title: project.title[lang],
-                    description: project.description[lang],
-                    subtitle: project.dateMade,
-                    tags: [],
-                    gallery: project.gallery?.length ? project.gallery : undefined,
-                    link: project.link || undefined,
-                    techIcons: project.techIcons,
-                    thumbnail: project.thumbnail,
-                  })
-                }
-                className="group cursor-pointer overflow-hidden rounded-xl border border-border/50 bg-card shadow-xs transition-all duration-300 hover:border-primary/30 hover:shadow-md"
-              >
-                <div className="flex flex-col">
-                  <div className="relative w-full">
-                    {project.techIcons && project.techIcons.length > 0 ? (
-                      <div className="w-full h-48 bg-gradient-to-br from-slate-900 to-slate-950 border-b border-slate-800 flex flex-wrap content-center items-center justify-center gap-4">
+          <div
+            className={`projects-grid mx-auto flex flex-wrap justify-center gap-6 ${
+              balancedTwoByTwo ? 'lg:max-w-[47.5rem]' : ''
+            }`}
+          >
+            {pageProjects.map(project => {
+              const title = project.title[lang]
+              const isOmni = project.visual === 'omni'
+              return (
+                <div
+                  key={project.id}
+                  id={isOmni ? OMNI_HASH.slice(1) : undefined}
+                  role="button"
+                  tabIndex={0}
+                  aria-haspopup="dialog"
+                  aria-label={title}
+                  onClick={() => setOpenProjectId(project.id)}
+                  onKeyDown={event => onCardKeyDown(event, project.id)}
+                  className={`project-card group flex w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-border/50 bg-card shadow-xs transition-all duration-300 hover:border-primary/30 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring md:w-[calc((100%_-_1.5rem)/2)] ${cardWidth} ${
+                    isOmni ? 'project-card--omni scroll-mt-24' : ''
+                  }`}
+                >
+                  <div className="relative h-48 w-full shrink-0">
+                    {isOmni ? (
+                      <OmniSignal lang={lang} />
+                    ) : project.techIcons && project.techIcons.length > 0 ? (
+                      <div className="w-full h-48 bg-gradient-to-br from-slate-900 to-slate-950 border-b border-slate-800 flex flex-wrap content-center items-center justify-center gap-4 px-4">
                         <div className="absolute inset-0 bg-slate-500/10 blur-3xl" />
                         {project.techIcons.map((iconClass, index) => (
                           <div
@@ -428,7 +548,7 @@ export function ProjectsSection() {
                       <div className="w-full h-48 overflow-hidden">
                         <img
                           src={project.thumbnail}
-                          alt={`${project.title[lang]} thumbnail`}
+                          alt={`${title} thumbnail`}
                           className="object-cover w-full h-full"
                         />
                       </div>
@@ -437,11 +557,7 @@ export function ProjectsSection() {
                         <CarouselContent className="h-full">
                           {project.gallery.map(img => (
                             <CarouselItem key={img} className="h-full">
-                              <img
-                                src={img}
-                                alt={`${project.title[lang]} screenshot`}
-                                className="w-full h-full object-cover"
-                              />
+                              <img src={img} alt={`${title} screenshot`} className="w-full h-full object-cover" />
                             </CarouselItem>
                           ))}
                         </CarouselContent>
@@ -452,34 +568,31 @@ export function ProjectsSection() {
                       <div className="flex w-full h-48 items-center justify-center bg-muted/50">
                         <div className="flex flex-col items-center gap-2 text-muted-foreground">
                           <Code2 className="size-8" />
-                          <span className="text-xs">{project.title[lang]}</span>
+                          <span className="text-xs">{title}</span>
                         </div>
                       </div>
                     )}
                   </div>
 
-                  <div className="flex flex-col justify-between p-5">
-                    <div>
-                      <div className="mb-2 flex items-start justify-between gap-4">
-                        <h3 className="text-lg font-bold text-foreground">{project.title[lang]}</h3>
-                        <span className="shrink-0 rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[11px] font-medium text-primary">
-                          {project.type === 'DEV'
-                            ? t('projects.badgeDev')
-                            : t('projects.badgeGeneral')}
-                        </span>
-                      </div>
-                      <p className="mb-2 text-sm text-muted-foreground">{project.dateMade}</p>
-                      <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
-                        {project.description[lang]}
-                      </p>
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="mb-2 flex items-start justify-between gap-4">
+                      <h3 className="line-clamp-2 min-h-[2lh] text-lg font-bold leading-snug text-foreground">{title}</h3>
+                      <span className="shrink-0 rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[11px] font-medium text-primary">
+                        {project.type === 'DEV' ? t('projects.badgeDev') : t('projects.badgeGeneral')}
+                      </span>
                     </div>
+                    <p className="mb-2 truncate text-sm text-muted-foreground">{localize(project.dateMade, lang)}</p>
+                    <p className="mb-4 line-clamp-3 min-h-[3lh] text-sm leading-relaxed text-muted-foreground">
+                      {(project.teaser ?? project.description)[lang]}
+                    </p>
                     {project.type === 'DEV' && (
-                      <div className="flex flex-wrap items-center gap-3">
+                      <div className="mt-auto flex min-h-6 flex-wrap items-center gap-3">
                         {project.link ? (
                           <a
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={event => event.stopPropagation()}
                             className="inline-flex items-center gap-1.5 text-xs font-medium text-primary transition-colors hover:text-primary-dark"
                           >
                             <Code2 className="size-3.5" />
@@ -498,30 +611,103 @@ export function ProjectsSection() {
                             Collab
                           </span>
                         )}
+                        {isOmni && (
+                          <span className="omni-chip inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-medium">
+                            {t('projects.omniChip')}
+                          </span>
+                        )}
                       </div>
                     )}
                   </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
+
+          <ProjectsPagination currentPage={currentPage} totalPages={totalPages} onPageChange={changePage} />
         </div>
       </section>
 
-      {modalContent && (
+      {openProject && (
         <DetailModal
-          isOpen={modalContent !== null}
-          onClose={() => setModalContent(null)}
-          title={modalContent.title}
-          description={modalContent.description}
-          subtitle={modalContent.subtitle}
-          period={undefined}
-          gallery={modalContent.gallery}
-          link={modalContent.link}
-          techIcons={modalContent.techIcons}
-          thumbnail={modalContent.thumbnail}
+          isOpen
+          onClose={closeModal}
+          title={openProject.title[lang]}
+          description={openProject.description[lang]}
+          subtitle={localize(openProject.dateMade, lang)}
+          gallery={openProject.gallery.length ? openProject.gallery : undefined}
+          link={openProject.link}
+          techIcons={openProject.techIcons}
+          thumbnail={openProject.thumbnail}
+          header={openProject.visual === 'omni' ? <OmniSignal lang={lang} size="hero" /> : undefined}
+          highlights={openProject.highlights?.map(item => ({
+            title: item.title[lang],
+            description: item.description[lang],
+          }))}
+          closing={openProject.closing?.[lang]}
+          accent={openProject.visual === 'omni' ? 'var(--omni-accent)' : undefined}
         />
       )}
     </>
+  )
+}
+
+function ProjectsPagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: {
+  currentPage: number
+  totalPages: number
+  onPageChange: (page: number) => void
+}) {
+  const { t } = useLanguage()
+  if (totalPages <= 1) return null
+
+  const pad = (n: number) => String(n).padStart(2, '0')
+  const status = t('projects.pageStatus')
+    .replace('{current}', String(currentPage + 1))
+    .replace('{total}', String(totalPages))
+
+  return (
+    <nav aria-label={t('projects.pagination')} className="projects-pagination mt-12 flex flex-col items-center gap-3">
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          className="projects-pagination__step"
+          disabled={currentPage === 0}
+          onClick={() => onPageChange(currentPage - 1)}
+        >
+          <ChevronLeft className="size-4" aria-hidden="true" />
+          <span className="hidden sm:inline">{t('projects.previous')}</span>
+          <span className="sr-only sm:hidden">{t('projects.previous')}</span>
+        </button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            type="button"
+            className="projects-pagination__page"
+            aria-current={index === currentPage ? 'page' : undefined}
+            aria-label={`${t('projects.goToPage')} ${index + 1}`}
+            onClick={() => onPageChange(index)}
+          >
+            {pad(index + 1)}
+          </button>
+        ))}
+        <button
+          type="button"
+          className="projects-pagination__step"
+          disabled={currentPage >= totalPages - 1}
+          onClick={() => onPageChange(currentPage + 1)}
+        >
+          <span className="hidden sm:inline">{t('projects.next')}</span>
+          <span className="sr-only sm:hidden">{t('projects.next')}</span>
+          <ChevronRight className="size-4" aria-hidden="true" />
+        </button>
+      </div>
+      <p className="projects-pagination__status" aria-live="polite">
+        {status}
+      </p>
+    </nav>
   )
 }
