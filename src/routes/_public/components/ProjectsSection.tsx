@@ -67,12 +67,12 @@ const MOCK_PROJECTS: ProjectCardData[] = [
     },
     dateMade: { pt: 'Projeto pessoal · em evolução contínua', en: 'Personal project · continuously evolving' },
     teaser: {
-      pt: 'O projeto da minha vida. Uma plataforma pessoal que coloca uma frota de IAs para planejar, escrever, testar e entregar software nos meus projetos — dia e noite — enquanto a palavra final continua sendo minha.',
-      en: 'The project of my life. A personal platform that puts a fleet of AI workers to plan, write, test and ship software across my projects — day and night — while the final word stays mine.',
+      pt: 'Meu projeto pessoal principal do momento. Uma plataforma pessoal que coloca uma frota de IAs para planejar, escrever, testar e entregar software nos meus projetos — dia e noite — enquanto a palavra final continua sendo minha.',
+      en: 'My main personal project right now. A personal platform that puts a fleet of AI workers to plan, write, test and ship software across my projects — day and night — while the final word stays mine.',
     },
     description: {
-      pt: 'E se o seu roadmap andasse sozinho enquanto você trabalha?\n\nO Omni é a plataforma pessoal de operações que eu construo — o projeto da minha vida. Ele roda nas minhas próprias máquinas, local-first, e coordena uma frota de agentes de IA que planejam, escrevem, testam e entregam software a qualquer hora do dia. Enquanto eu cumpro o meu expediente, ele transforma o meu roadmap em versões entregues e testadas, prontas para a minha revisão.',
-      en: 'What if your roadmap kept moving while you were at work?\n\nOmni is the personal operations platform I build — the project of my life. It runs on my own machines, local-first, and coordinates a fleet of AI workers that plan, write, test and ship software at any hour. While I am at my day job, it turns my roadmap into delivered, tested releases, ready for my review.',
+      pt: 'E se o seu roadmap andasse sozinho enquanto você trabalha?\n\nO Omni é a plataforma pessoal de operações que eu construo — meu projeto pessoal principal do momento. Ele roda nas minhas próprias máquinas, local-first, e coordena uma frota de agentes de IA que planejam, escrevem, testam e entregam software a qualquer hora do dia. Enquanto eu cumpro o meu expediente, ele transforma o meu roadmap em versões entregues e testadas, prontas para a minha revisão.',
+      en: 'What if your roadmap kept moving while you were at work?\n\nOmni is the personal operations platform I build — my main personal project right now. It runs on my own machines, local-first, and coordinates a fleet of AI workers that plan, write, test and ship software at any hour. While I am at my day job, it turns my roadmap into delivered, tested releases, ready for my review.',
     },
     highlights: [
       {
