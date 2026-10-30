@@ -1,5 +1,4 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
-import { FloatingEmbraerBanner } from '@/shared/components/floating-embraer-banner'
 import { PublicHeader } from '@/shared/components/PublicHeader'
 import { LanguageProvider } from '@/shared/contexts/LanguageContext'
 
@@ -11,7 +10,6 @@ function PublicLayout() {
   return (
     <LanguageProvider>
       <PublicHeader />
-      <FloatingEmbraerBanner />
       <Outlet />
     </LanguageProvider>
   )
